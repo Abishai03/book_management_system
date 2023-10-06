@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add a Book</title>
+</head>
+<body>
+    <h1>Add a New Book</h1>
+    
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    
+    <form action="{{ url_for('add_book') }}" method="post">
+        Title: <input type="text" name="title" required><br>
+        Author: <input type="text" name="author" required><br>
+        ISDN: <input type="text" name="ISDN" required><br>
+        Price: <input type="text" name="price" required><br>
+        Description: <textarea name="description" required></textarea><br>
+        <input type="submit" value="Add">
+    </form>
+
+    <a href="{{ url_for('index') }}">Return to Home</a>
+</body>
+</html>
