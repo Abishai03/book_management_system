@@ -1,3 +1,7 @@
+
+{% extends "base.html" %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +28,8 @@
     </style>
 </head>
 <body>
-    <h1>List of Books</h1>
-    <a href="{{ url_for('login') }}" class="btn">Add Books by Seller</a>
+    <!-- <h1>List of Books</h1> -->
+    <!-- <a href="{{ url_for('login') }}" class="btn">Add Books by Seller</a> -->
     <table>
         <thead>
             <tr>
@@ -50,3 +54,5 @@
     </table>
 </body>
 </html>
+
+{% endblock %}
