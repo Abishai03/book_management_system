@@ -148,13 +148,6 @@ html, body {
             <div>
                 <a href="/">Home</a>
                 <a href="{{ url_for('login') }}">Add Book</a>
-                
-{% if not session.get('admin_logged_in') %}
-    <a href="/login">Login</a>
-{% else %}
-    <a href="/logout">Logout</a>
-{% endif %}
-
             </div>
             <div class="search-container">
                 <input type="text" class="search-box" placeholder="Search">
