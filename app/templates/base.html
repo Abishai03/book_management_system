@@ -143,11 +143,24 @@ html, body {
     <div class="container">
         <div class="header">
             <a href="/" class="logo">Book Store</a>
+
+            <!-- Show the login button if the user is logged in, otherwise show the login link -->
+            {% if 'username' in session %}
+                <p>Hello, {{ session['username'] }}!</p> 
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+
         </div>
         <div class="ribbon">
             <div>
                 <a href="/">Home</a>
-                <a href="{{ url_for('login') }}">Add Book</a>
+                
+                <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
+                {% if session['user_role'] == 'admin' %}
+                    <a href="{{ url_for('add_book') }}">Add Book</a>
+                {% endif %}
             </div>
             <div class="search-container">
                 <input type="text" class="search-box" placeholder="Search">

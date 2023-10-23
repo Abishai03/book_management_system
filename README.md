@@ -24,6 +24,7 @@ This application allows users to view a list of books and provides an admin inte
         (CSS, JS, images, etc.)
     /data
         books.json
+        users.json
     __init__.py
     routes.py
 run.py
@@ -42,6 +43,13 @@ run.py
 2. Navigate to the directory containing `run.py`.
 3. Run the application with `python run.py`.
 4. Access the application in a browser using the URL: `http://127.0.0.1:5000/`.
+
+## Database Schema
+All the data is stored in JSON file.
+**books.json**: Stores the book data.
+**users.json**: Stores the user data.
+
+Only the admin user can add new books to the database.
 
 ## To-Do's (Future Improvements)
 

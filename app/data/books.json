@@ -1,1 +1,86 @@
-[{"title": "The Power of Now", "author": "Eckhart Tolle", "ISDN": 1234567890123, "price": 15.99, "description": "A guide to spiritual enlightenment, emphasizing the importance of living in the present moment."}, {"title": "How to Win Friends and Influence People", "author": "Dale Carnegie", "ISDN": 1234567890124, "price": 12.99, "description": "Timeless advice on interpersonal relationships and communication."}, {"title": "The 7 Habits of Highly Effective People", "author": "Stephen R. Covey", "ISDN": 1234567890126, "price": 19.99, "description": "Proven principles for personal and professional success."}, {"title": "Daring Greatly", "author": "Bren\u00e9 Brown", "ISDN": 1234567890127, "price": 18.99, "description": "An exploration of vulnerability and its role in leading a full, courageous life."}, {"title": "You Are a Badass", "author": "Jen Sincero", "ISDN": 1234567890128, "price": 14.99, "description": "A self-help guide that offers advice on how to create a life you love."}, {"title": "The Subtle Art of Not Giving a F*ck", "author": "Mark Manson", "ISDN": 1234567890129, "price": 16.99, "description": "A counter-intuitive approach to living a good life by focusing on what truly matters."}, {"title": "Mindset: The New Psychology of Success", "author": "Carol S. Dweck", "ISDN": 1234567890130, "price": 20.99, "description": "A look at the role of mindset in success and how to cultivate a growth mindset."}, {"title": "Drive: The Surprising Truth About What Motivates Us", "author": "Daniel H. Pink", "ISDN": 1234567890131, "price": 18.99, "description": "A deep dive into human motivation and how autonomy, mastery, and purpose drive us."}, {"title": "The Four Agreements", "author": "Don Miguel Ruiz", "ISDN": 1234567890132, "price": 13.99, "description": "A spiritual guide based on ancient Toltec wisdom that offers four agreements for creating love and happiness in one's life."}, {"title": "Gym Launch Secrets", "author": "Alex Hormozi ", "ISDN": "1234567890199", "price": 24.99, "description": "The step-by-step guide for gym owners to learn how to get more clients, how to make more per client, and how to keep them for life. This is the culmination of lessons learned while helping over 2500 gyms find massive success in a crowded and commoditized industry. Straight from the most profitable gym owners (over 7-figures a year), the insights collected here are straight to the point, with no fluff."}, {"title": "12 Rules For Life", "author": "Jordan B. Peterson ", "ISDN": "1234567890111", "price": 16.99, "description": "Humorous, surprising and informative, Dr. Peterson tells us why skateboarding boys and girls must be left alone, what terrible fate awaits those who criticize too easily, and why you should always pet a cat when you meet one on the street."}, {"title": "The 10X Rule: The Only Difference Between Success and Failure", "author": "Grant Cardone", "ISDN": "1234567890133", "price": 16.0, "description": "Achieve \"Massive Action\" results and accomplish your business dreams!\r\nWhile most people operate with only three degrees of action-no action, retreat, or normal action-if you're after big goals, you don't want to settle for the ordinary. To reach the next level, you must understand the coveted 4th degree of action. This 4th degree, also know as the 10 X Rule, is that level of action that guarantees companies and individuals realize their goals and dreams.\r\n\r\nThe 10 X Rule unveils the principle of \"Massive Action,\" allowing you to blast through business clich\u017ds and risk-aversion while taking concrete steps to reach your dreams. It also demonstrates why people get stuck in the first three actions and how to move into making the 10X Rule a discipline. Find out exactly where to start, what to do, and how to follow up each action you take with more action to achieve Massive Action results.\r\n\r\nLearn the \"Estimation of Effort\" calculation to ensure you exceed your targets\r\nMake the Fourth Degree a way of life and defy mediocrity\r\nDiscover the time management myth\r\nGet the exact reasons why people fail and others succeed\r\nKnow the exact formula to solve problems\r\nExtreme success is by definition outside the realm of normal action. Instead of behaving like everybody else and settling for average results, take Massive Action with The 10 X Rule, remove luck and chance from your business equation, and lock in massive success."}]
+[
+    {
+        "title": "The Power of Now",
+        "author": "Eckhart Tolle",
+        "ISDN": 1234567890123,
+        "price": 15.99,
+        "description": "A guide to spiritual enlightenment, emphasizing the importance of living in the present moment."
+    },
+    {
+        "title": "How to Win Friends and Influence People",
+        "author": "Dale Carnegie",
+        "ISDN": 1234567890124,
+        "price": 12.99,
+        "description": "Timeless advice on interpersonal relationships and communication."
+    },
+    {
+        "title": "The 7 Habits of Highly Effective People",
+        "author": "Stephen R. Covey",
+        "ISDN": 1234567890126,
+        "price": 19.99,
+        "description": "Proven principles for personal and professional success."
+    },
+    {
+        "title": "Daring Greatly",
+        "author": "Brené Brown",
+        "ISDN": 1234567890127,
+        "price": 18.99,
+        "description": "An exploration of vulnerability and its role in leading a full, courageous life."
+    },
+    {
+        "title": "You Are a Badass",
+        "author": "Jen Sincero",
+        "ISDN": 1234567890128,
+        "price": 14.99,
+        "description": "A self-help guide that offers advice on how to create a life you love."
+    },
+    {
+        "title": "The Subtle Art of Not Giving a F*ck",
+        "author": "Mark Manson",
+        "ISDN": 1234567890129,
+        "price": 16.99,
+        "description": "A counter-intuitive approach to living a good life by focusing on what truly matters."
+    },
+    {
+        "title": "Mindset: The New Psychology of Success",
+        "author": "Carol S. Dweck",
+        "ISDN": 1234567890130,
+        "price": 20.99,
+        "description": "A look at the role of mindset in success and how to cultivate a growth mindset."
+    },
+    {
+        "title": "Drive: The Surprising Truth About What Motivates Us",
+        "author": "Daniel H. Pink",
+        "ISDN": 1234567890131,
+        "price": 18.99,
+        "description": "A deep dive into human motivation and how autonomy, mastery, and purpose drive us."
+    },
+    {
+        "title": "The Four Agreements",
+        "author": "Don Miguel Ruiz",
+        "ISDN": 1234567890132,
+        "price": 13.99,
+        "description": "A spiritual guide based on ancient Toltec wisdom that offers four agreements for creating love and happiness in one's life."
+    },
+    {
+        "title": "Gym Launch Secrets",
+        "author": "Alex Hormozi ",
+        "ISDN": "1234567890199",
+        "price": 24.99,
+        "description": "The step-by-step guide for gym owners to learn how to get more clients, how to make more per client, and how to keep them for life. This is the culmination of lessons learned while helping over 2500 gyms find massive success in a crowded and commoditized industry. Straight from the most profitable gym owners (over 7-figures a year), the insights collected here are straight to the point, with no fluff."
+    },
+    {
+        "title": "12 Rules For Life",
+        "author": "Jordan B. Peterson ",
+        "ISDN": "1234567890111",
+        "price": 16.99,
+        "description": "Humorous, surprising and informative, Dr. Peterson tells us why skateboarding boys and girls must be left alone, what terrible fate awaits those who criticize too easily, and why you should always pet a cat when you meet one on the street."
+    },
+    {
+        "title": "The 10X Rule: The Only Difference Between Success and Failure",
+        "author": "Grant Cardone",
+        "ISDN": "1234567890133",
+        "price": 16.0,
+        "description": "Achieve \"Massive Action\" results and accomplish your business dreams!\r\nWhile most people operate with only three degrees of action-no action, retreat, or normal action-if you're after big goals, you don't want to settle for the ordinary."
+    }
+]

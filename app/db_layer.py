@@ -28,3 +28,7 @@ def add_book_to_json(book: dict) -> bool:
 def remove_book_from_json(ISDN: str) -> bool:
     # TODO: Implement this function
     pass
+
+def get_users():
+    with open('app/data/users.json') as f:
+        return json.load(f)
