@@ -81,3 +81,28 @@ def logout():
         return redirect(url_for('index'))
     else:
         return redirect(url_for('login'))
+
+@app.route('/search')
+def search():
+  query = request.args.get('query')
+  books = search_books(query)
+
+  if not books:
+    books = [{
+        "title": "No results found",
+        "author": "",
+        "ISDN": "",
+        "price": "",
+        "description": "Try searching for a different book."
+    }]
+
+  return render_template('index.html', books=books)
+
+def search_books(query):
+    results = []
+    all_books = get_books_from_json()
+    for book in all_books:
+        if query.lower() in book['title'].lower(): 
+            results.append(book)
+
+    return results

@@ -163,9 +163,13 @@ html, body {
                 {% endif %}
             </div>
             <div class="search-container">
-                <input type="text" class="search-box" placeholder="Search">
-                <button class="search-button">&#128269;</button>  <!-- Magnifying glass icon -->
-            </div>
+                <form action="{{ url_for('search') }}" method="get">
+                  <input name="query" type="text" class="search-box" placeholder="Search">
+                  <button type="submit" class="search-button">
+                    &#128269; 
+                  </button>
+                </form>
+              </div>
         </div>
         
 <div class="base-ribbon">
