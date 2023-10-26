@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style> /* Add some basic styling to the page */
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f7f7f7;
+          margin: 0;
+          padding: 0;
+      }
+      
+      h1 {
+          text-align: center;
+          color: #333;
+      }
+      
+      form {
+          max-width: 400px;
+          margin: 0 auto;
+          background-color: #fff;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      label {
+          display: block;
+          margin-bottom: 5px;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+      
+      textarea {
+          height: 100px;
+      }
+      
+      input[type="submit"] {
+          background-color: #333;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      
+      input[type="submit"]:hover {
+          background-color: #555;
+      }
+    </style>      
+    
+</head>
+<body>
+  <h1>Contact Us</h1>
+  <form method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required><br>
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required><br>
+
+      <label for="message">Message:</label>
+      <textarea name="message" id="message" rows="4" required></textarea><br>
+
+      <input type="submit" value="Submit">
+  </form>
+    
+</body>
+</html>
+
+{% endblock %}
