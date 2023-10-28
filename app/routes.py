@@ -1,8 +1,9 @@
 from app import app
-from flask import render_template, request, redirect, url_for, session
+from flask import  Flask, render_template, request, redirect, url_for, session
 from .db_layer import *
 import logging
 from datetime import timedelta
+ 
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
@@ -51,9 +52,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        import os
-        print(os.path.abspath('app/data/users.json'))
-        
+         
         user = authenticate_user(username, password)
         if user:
             session['user_id'] = user['id']
@@ -106,3 +105,17 @@ def search_books(query):
             results.append(book)
 
     return results
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+@app.route('/tou')
+def tou():
+    return render_template('tou.html')
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')
+
+ 

@@ -6,6 +6,64 @@
 <html>
 <head>
     <title>Add a Book</title>
+    <style> 
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: 	#808080;
+        }
+
+        /*a {
+            display: block;
+            margin-top: 0px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            color: #ff0000;
+        }*/
+    </style>
 </head>
 <body>
     <h1>Add a New Book</h1>
@@ -13,7 +71,7 @@
     {% if message %}
         <p>{{ message }}</p>
     {% endif %}
-    
+ 
     <form action="{{ url_for('add_book') }}" method="post">
         Title: <input type="text" name="title" required><br>
         Author: <input type="text" name="author" required><br>
@@ -22,7 +80,7 @@
         Description: <textarea name="description" required></textarea><br>
         <input type="submit" value="Add">
     </form>
-
+ 
     <a href="{{ url_for('index') }}">Return to Home</a>
 </body>
 </html>
