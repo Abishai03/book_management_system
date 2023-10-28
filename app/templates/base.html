@@ -79,53 +79,53 @@
 
         /* Common button style */
 
-/* Ensure html and body elements take full height */
+        /* Ensure html and body elements take full height */
 
-/* Fixed positioning for the base ribbon */
-.base-ribbon {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f4f4f4;  /* background color to ensure content behind isn't visible */
-}
+        /* Fixed positioning for the base ribbon */
+        .base-ribbon {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f4f4f4;  /* background color to ensure content behind isn't visible */
+        }
 
-/* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
-.container {
-    padding-bottom: 50px;  /* Adjusted padding to account for the height of the base ribbon */
-}
+        /* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
+        .container {
+            padding-bottom: 50px;  /* Adjusted padding to account for the height of the base ribbon */
+        }
 
-html, body {
-    height: 100%;
-}
+        html, body {
+            height: 100%;
+        }
 
-/* Make the container take full height minus its padding */
-.container {
-    min-height: calc(100% - 40px);  /* subtracting top and bottom padding */
-    display: flex;
-    flex-direction: column;
-}
+        /* Make the container take full height minus its padding */
+        .container {
+            min-height: calc(100% - 40px);  /* subtracting top and bottom padding */
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Make content grow to take available space */
-.content {
-    flex: 1;
-}
+        /* Make content grow to take available space */
+        .content {
+            flex: 1;
+        }
 
 
-.base-ribbon {
-    background-color: #eee;
-    padding: 10px 0;
-    text-align: center;
-    border-top: 1px solid #ccc;
-    margin-top: 20px;
-}
+        .base-ribbon {
+            background-color: #eee;
+            padding: 10px 0;
+            text-align: center;
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+        }
 
-.base-ribbon a {
-    color: #333;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 14px;
-}
+        .base-ribbon a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
 
         button {
             background-color: #333;
