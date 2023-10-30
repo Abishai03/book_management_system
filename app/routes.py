@@ -118,4 +118,34 @@ def tou():
 def contact_us():
     return render_template('contact_us.html')
 
+@app.route('/')
+def home():
+    if 'username' in session:
+        return f'Hello, {session["username"]}! <a href="/logout">Logout</a>'
+    return 'You are not logged in. <a href="/login">Login</a> or <a href="/signup">Sign Up</a>'
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        if password != confirm_password:
+            error = 'Passwords do not match.'
+        else:
+            data = load_users()
+            if username in data['users']:
+                error = 'Username already exists.'
+            else:
+                data['users'].append(username)
+                save_users(data)
+                session['username'] = username
+                return redirect(url_for('home'))
+        
+        return render_template('signup.html', error=error)
+
+    return render_template('signup.html')
+
  

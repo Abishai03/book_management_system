@@ -32,3 +32,15 @@ def remove_book_from_json(ISDN: str) -> bool:
 def get_users():
     with open('app/data/users.json') as f:
         return json.load(f)
+
+def load_users():
+    try:
+        with open('users.json', 'r') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = {"users": []}
+    return data
+
+def save_users(data):
+    with open('users.json', 'w') as f:
+        json.dump(data, f, indent=4)
