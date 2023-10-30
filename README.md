@@ -20,8 +20,10 @@ This application allows users to view a list of books and provides an admin inte
         index.html
         login.html
         add_book.html
-    /static
-        (CSS, JS, images, etc.)
+        base.html
+        help.html
+        tou.html
+        contact_us.html
     /data
         books.json
         users.json
