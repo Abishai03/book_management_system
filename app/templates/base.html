@@ -164,6 +164,12 @@
                 <a href="{{ url_for('login') }}" class="buttonn">Login</a>
             {% endif %}
 
+            <!-- Show the sign-up button if the user is logged in, otherwise show the sign-up link -->
+            {% if 'username' in session %}
+            {% else %}
+                <a href="{{ url_for('signup') }}" class="buttonn">Sign up</a>
+            {% endif %}
+
         </div>
         <div class="ribbon">
             <div>
