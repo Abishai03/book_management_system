@@ -52,21 +52,58 @@
     {% endif %}
     <div class="signup-container">
         <form action="{{ url_for('signup') }}" method="post">
-
+    
+            <!-- Username input -->
             <div class="input-section">
                 Username: <input type="text" name="username" required><br>
             </div>
+    
+            <!-- Password input -->
             <div class="input-section">
-                Password: <input type="password" name="password1" required><br>
+                Password: <input type="password" name="password1" id="password1" required><br>
             </div>
+    
+            <!-- Password confirmation input -->
             <div class="input-section">
-                Re-enter: <input type="password" name="password2" required><br>
+                Re-enter: <input type="password" name="password2" id="password2" required><br>
             </div>
-          
+            
+            <!-- Checkbox to toggle password visibility -->
+            <div class="input-section">
+                <input type="checkbox" id="show_password"> Show password
+            </div>
+    
+            <!-- Submit button -->
             <input type="submit" value="Signup">
           
-          </form>
+        </form>
     </div>
+    
+    <script>
+        // This js script adds functionality to toggle the visibility of passwords
+    
+        // Get the password input elements by their ID attributes
+        var passwordInput1 = document.getElementById('password1');
+        var passwordInput2 = document.getElementById('password2');
+    
+        // Get the checkbox input element by its ID attribute
+        var showPasswordCheckbox = document.getElementById('show_password');
+    
+        // Add an event listener to the checkbox for the 'click' event
+        // This function will be called every time the checkbox is clicked
+        showPasswordCheckbox.addEventListener('click', function (e) {
+            // Determine the new type for the input fields:
+            // If the checkbox is checked, set type to 'text' to show the password
+            // If it's unchecked, set type back to 'password' to hide it
+            var type = showPasswordCheckbox.checked ? 'text' : 'password';
+    
+            // Set the type attribute of the password input fields
+            // This changes them from password fields to text fields or vice versa
+            passwordInput1.setAttribute('type', type);
+            passwordInput2.setAttribute('type', type);
+        });
+    </script>    
+    
 </body>
 </html>
 
