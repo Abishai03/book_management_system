@@ -1,8 +1,9 @@
 from app import app
-from flask import render_template, request, redirect, url_for, session
+from flask import  Flask, render_template, request, redirect, url_for, session, flash
 from .db_layer import *
 import logging
 from datetime import timedelta
+ 
 
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
@@ -51,9 +52,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        import os
-        print(os.path.abspath('app/data/users.json'))
-        
+         
         user = authenticate_user(username, password)
         if user:
             session['user_id'] = user['id']
@@ -106,3 +105,48 @@ def search_books(query):
             results.append(book)
 
     return results
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+@app.route('/tou')
+def tou():
+    return render_template('tou.html')
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')
+
+@app.route('/signup', methods=['GET', 'POST']) 
+def signup():
+  if 'user_id' in session:
+    return redirect(url_for('index'))
+
+  error = None  
+  if request.method == 'POST':
+    username = request.form['username']
+    password1 = request.form['password1']
+    password2 = request.form['password2']
+
+    error = f'Display date: {username} {password1} {password2}'
+
+    if password1!= password2:
+        error = 'Passwords do not match'
+    elif len(password1) < 1:
+        error = 'Password must be at least 8 characters'
+    else:
+        # Check if username is already taken
+        users = get_users()
+        if username in [user['username'] for user in users]:
+            error = 'Username already taken. Please choose another username.'
+        else:
+            # Add new user to database
+            if add_user(username, password1):
+                error = 'User Added'
+                flash('User signed up successfully!')
+                return render_template('login.html', error='User Added. Please login.')
+            else:
+                error = 'Failed to add user to database'
+
+  return render_template('signup.html', error=error)

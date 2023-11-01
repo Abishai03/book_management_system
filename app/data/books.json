@@ -22,7 +22,7 @@
     },
     {
         "title": "Daring Greatly",
-        "author": "Brené Brown",
+        "author": "Bren\u00c3\u00a9 Brown",
         "ISDN": 1234567890127,
         "price": 18.99,
         "description": "An exploration of vulnerability and its role in leading a full, courageous life."
@@ -82,5 +82,33 @@
         "ISDN": "1234567890133",
         "price": 16.0,
         "description": "Achieve \"Massive Action\" results and accomplish your business dreams!\r\nWhile most people operate with only three degrees of action-no action, retreat, or normal action-if you're after big goals, you don't want to settle for the ordinary."
+    },
+    {
+        "title": "One Day In December",
+        "author": "Josie Silver",
+        "ISDN": "44061279009443",
+        "price": 30.0,
+        "description": "About love at first sight hindered by situations."
+    },
+    {
+        "title": "The Story Of My Life",
+        "author": "Helen Keller",
+        "ISDN": "44061279009442",
+        "price": 14.0,
+        "description": "Autobiography detailing her early life, particularly her experiences with Anne Sullivan."
+    },
+    {
+        "title": "The Highly Sensitive Person",
+        "author": "Elaine Aron",
+        "ISDN": "44061279009459",
+        "price": 16.0,
+        "description": "How to cope with the world when it overwhelms you."
+    },
+    {
+        "title": "The 4-Hour Workweek",
+        "author": "Timothy Ferriss",
+        "ISDN": "1234567890133",
+        "price": 9.99,
+        "description": "Forget the old concept of retirement and the rest of the deferred-life plan\u2013there is no need to wait and every reason not to, especially in unpredictable economic times. Whether your dream is escaping the rat race, experiencing high-end world travel, or earning a monthly five-figure income with zero management, The 4-Hour Workweek is the blueprint."
     }
 ]
