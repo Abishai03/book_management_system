@@ -48,6 +48,7 @@
                     <td>{{ book.ISDN }}</td>
                     <td>${{ book.price }}</td>
                     <td>{{ book.description }}</td>
+                    <td><button onclick="onAddCart({{book}})" id="addToCart" value="{{book}}">Add To Cart</button></td>
                 </tr>
             {% endfor %}
         </tbody>

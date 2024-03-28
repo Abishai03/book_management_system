@@ -1,13 +1,12 @@
 # from app import app
 from flask import  Flask, render_template, request, redirect, url_for, session, flash
-from db_layer import *
+# from db_layer import *
 import logging
 from datetime import timedelta
 from datetime import timedelta, datetime
 from flask_sqlalchemy import SQLAlchemy
-from chat_db import db_chain
+# from chat_db import db_chain
 from flask import jsonify
-
 
 # logging.basicConfig(filename='app.log', level=logging.INFO)
 
@@ -34,6 +33,7 @@ class Book(db.Model):
     price = db.Column(db.Float(80),  nullable=False)
     description = db.Column(db.String(200), nullable=False)
 
+
 # # tables creations
 # with app.app_context():
 #     db.create_all()
@@ -43,7 +43,7 @@ def index():
 
     books = Book.query.all()
     book_list = [{'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description } for book in books]
-    print(book_list)
+    # print(book_list)
 
     # books = get_books_from_json()
     # for book in books:
@@ -51,7 +51,6 @@ def index():
     #     db.session.add(new_user)
     #     db.session.commit()
     
-    # print("books: ",books)
     return render_template('index.html', books=book_list)
 
 @app.route('/add_book', methods=['GET', 'POST'])
@@ -62,7 +61,6 @@ def add_book():
     if request.method == 'POST':
 
         try:
-
             new_user = Book(title=request.form['title'], author=request.form['author'], ISDN=request.form['ISDN'], price = float(request.form['price']),description=request.form['description'])
             db.session.add(new_user)
             db.session.commit()
@@ -129,19 +127,12 @@ def search():
   return render_template('index.html', books=books)
 
 def search_books(query):
-    
+    # query database
     books = Book.query.filter(Book.title.ilike('%'+str(query)+"%")).all()
     
     # Prepare the response
     results = [{'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description } for book in books]
-    # print("results: ",results)
-    # results = []
-    # all_books = get_books_from_json()
-    # for book in all_books:
-    #     if query.lower() in book['title'].lower(): 
-    #         results.append(book)
 
-    # print("results: ",results)
     return results
 
 @app.route('/chat', methods=['GET', 'POST'])
@@ -151,12 +142,14 @@ def chat():
     if request.method == 'POST':
         message = request.json['msg']
         response = db_chain.run(message)
-        
     
         return jsonify({"message":response})
     
     return render_template('chat.html', message=None)
 
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
 
 @app.route('/help')
 def help():
@@ -172,7 +165,6 @@ def contact_us():
 
 @app.route('/signup', methods=['GET', 'POST']) 
 def signup():
-  print(request.form)
   error = None
   if 'username' in session and session['role'] != 'admin':
     return redirect(url_for('index'))

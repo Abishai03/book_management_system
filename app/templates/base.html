@@ -150,11 +150,78 @@
           }
 
     </style>
+    <script>
+        var cartItems = []
+
+        function saveCartItemsToStorage(itemToSave) {
+            localStorage.setItem('cartItems', JSON.stringify(itemToSave));
+        }
+
+        // Function to retrieve cart items from localStorage
+        function getCartItemsFromStorage() {
+            const storedCartItems = localStorage.getItem('cartItems');
+            if(storedCartItems){
+                displayToCart(JSON.parse(storedCartItems))
+            }
+            return storedCartItems ? JSON.parse(storedCartItems) : [];
+        }
+
+        cartItems = getCartItemsFromStorage()
+        window.onload = function () {
+            displayToCart(cartItems)
+        }
+
+        function onAddCart (e) {
+            const isExist = cartItems.findIndex((item) => item.ISDN === e.ISDN)
+            if(isExist === -1){
+                cartItems.push(e)
+            }
+            else
+            {
+                alert("Item already added to Cart.")
+            }
+            saveCartItemsToStorage(cartItems)
+            displayToCart(cartItems)
+        }
+
+        function displayToCart (items) {
+            var totalPrice = document.getElementById('total')
+            var books = document.getElementById('books')
+            let totalPriceCounts = 0
+            for (let i = 0; i <items.length ; i++) {
+                totalPriceCounts += items[i].price
+            }
+            if(totalPrice && books) {
+                totalPrice.textContent = totalPriceCounts.toFixed(2)
+                books.textContent = items.length
+            }
+        }
+
+        function clearCart () {
+            cartItems = []
+            var totalPrice = document.getElementById('total')
+            var books = document.getElementById('books')
+
+            totalPrice.textContent = 0
+            books.textContent = 0
+        }
+
+    
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <a href="/" class="logo">Book Store</a>
+
+            <div id="cart">
+                <p class="books">Books: <span id="books">0</span></p>
+                <p class="total">Total: $<span id="total">0</span></p>
+                <div>
+                    <button onclick="clearCart()">Clear Cart</button>
+                    <a href="{{ url_for('cart')}}">View Items</a>
+                </div>
+            </div>
 
             <!-- Show the login button if the user is logged in, otherwise show the login link -->
             {% if 'username' in session %}
@@ -176,9 +243,10 @@
                 <a href="/">Home</a>
                 
                 <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
-                {% if session['user_role'] == 'admin' %}
+                {% if session['role'] == 'admin' %}
                     <a href="{{ url_for('add_book') }}">Add Book</a>
                 {% endif %}
+                <a href="{{ url_for('chat') }}">Chat</a>
             </div>
             <div class="search-container">
                 <form action="{{ url_for('search') }}" method="get">
