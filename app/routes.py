@@ -1,6 +1,6 @@
 # from app import app
 from flask import  Flask, render_template, request, redirect, url_for, session, flash
-# from db_layer import *
+from .db_layer import *
 import logging
 from datetime import timedelta
 from datetime import timedelta, datetime
@@ -43,9 +43,9 @@ def index():
 
     books = Book.query.all()
     book_list = [{'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description } for book in books]
-    # print(book_list)
 
     # books = get_books_from_json()
+    # print(books)
     # for book in books:
     #     new_user = Book(title=book['title'], author=book['author'], ISDN=book['ISDN'], price = float(book['price']),description=book['description'])
     #     db.session.add(new_user)
@@ -201,5 +201,5 @@ def signup():
 
   return render_template('signup.html', error=error)
 
-if __name__ == '__main__':
-    app.run(port=5000)
+# if __name__ == '__main__':
+#     app.run(port=5000)

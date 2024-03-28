@@ -1,0 +1,114 @@
+[
+    {
+        "title": "The Power of Now",
+        "author": "Eckhart Tolle",
+        "ISDN": 1234567890123,
+        "price": 15.99,
+        "description": "A guide to spiritual enlightenment, emphasizing the importance of living in the present moment."
+    },
+    {
+        "title": "How to Win Friends and Influence People",
+        "author": "Dale Carnegie",
+        "ISDN": 1234567890124,
+        "price": 12.99,
+        "description": "Timeless advice on interpersonal relationships and communication."
+    },
+    {
+        "title": "The 7 Habits of Highly Effective People",
+        "author": "Stephen R. Covey",
+        "ISDN": 1234567890126,
+        "price": 19.99,
+        "description": "Proven principles for personal and professional success."
+    },
+    {
+        "title": "Daring Greatly",
+        "author": "Bren\u00c3\u00a9 Brown",
+        "ISDN": 1234567890127,
+        "price": 18.99,
+        "description": "An exploration of vulnerability and its role in leading a full, courageous life."
+    },
+    {
+        "title": "You Are a Badass",
+        "author": "Jen Sincero",
+        "ISDN": 1234567890128,
+        "price": 14.99,
+        "description": "A self-help guide that offers advice on how to create a life you love."
+    },
+    {
+        "title": "The Subtle Art of Not Giving a F*ck",
+        "author": "Mark Manson",
+        "ISDN": 1234567890129,
+        "price": 16.99,
+        "description": "A counter-intuitive approach to living a good life by focusing on what truly matters."
+    },
+    {
+        "title": "Mindset: The New Psychology of Success",
+        "author": "Carol S. Dweck",
+        "ISDN": 1234567890130,
+        "price": 20.99,
+        "description": "A look at the role of mindset in success and how to cultivate a growth mindset."
+    },
+    {
+        "title": "Drive: The Surprising Truth About What Motivates Us",
+        "author": "Daniel H. Pink",
+        "ISDN": 1234567890131,
+        "price": 18.99,
+        "description": "A deep dive into human motivation and how autonomy, mastery, and purpose drive us."
+    },
+    {
+        "title": "The Four Agreements",
+        "author": "Don Miguel Ruiz",
+        "ISDN": 1234567890132,
+        "price": 13.99,
+        "description": "A spiritual guide based on ancient Toltec wisdom that offers four agreements for creating love and happiness in one's life."
+    },
+    {
+        "title": "Gym Launch Secrets",
+        "author": "Alex Hormozi ",
+        "ISDN": "1234567890199",
+        "price": 24.99,
+        "description": "The step-by-step guide for gym owners to learn how to get more clients, how to make more per client, and how to keep them for life. This is the culmination of lessons learned while helping over 2500 gyms find massive success in a crowded and commoditized industry. Straight from the most profitable gym owners (over 7-figures a year), the insights collected here are straight to the point, with no fluff."
+    },
+    {
+        "title": "12 Rules For Life",
+        "author": "Jordan B. Peterson ",
+        "ISDN": "1234567890111",
+        "price": 16.99,
+        "description": "Humorous, surprising and informative, Dr. Peterson tells us why skateboarding boys and girls must be left alone, what terrible fate awaits those who criticize too easily, and why you should always pet a cat when you meet one on the street."
+    },
+    {
+        "title": "The 10X Rule: The Only Difference Between Success and Failure",
+        "author": "Grant Cardone",
+        "ISDN": "1234567890133",
+        "price": 16.0,
+        "description": "Achieve \"Massive Action\" results and accomplish your business dreams!\r\nWhile most people operate with only three degrees of action-no action, retreat, or normal action-if you're after big goals, you don't want to settle for the ordinary."
+    },
+    {
+        "title": "One Day In December",
+        "author": "Josie Silver",
+        "ISDN": "44061279009443",
+        "price": 30.0,
+        "description": "About love at first sight hindered by situations."
+    },
+    {
+        "title": "The Story Of My Life",
+        "author": "Helen Keller",
+        "ISDN": "44061279009442",
+        "price": 14.0,
+        "description": "Autobiography detailing her early life, particularly her experiences with Anne Sullivan."
+    },
+    {
+        "title": "The Highly Sensitive Person",
+        "author": "Elaine Aron",
+        "ISDN": "44061279009459",
+        "price": 16.0,
+        "description": "How to cope with the world when it overwhelms you."
+    },
+    {
+        "title": "The 4-Hour Workweek",
+        "author": "Timothy Ferriss",
+        "ISDN": "1234567890133",
+        "price": 9.99,
+        "description": "Forget the old concept of retirement and the rest of the deferred-life plan\u2013there is no need to wait and every reason not to, especially in unpredictable economic times. Whether your dream is escaping the rat race, experiencing high-end world travel, or earning a monthly five-figure income with zero management, The 4-Hour Workweek is the blueprint."
+    }
+]
