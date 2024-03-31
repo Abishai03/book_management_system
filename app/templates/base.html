@@ -1,204 +1,306 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/chatbot-ui.css">
+
     <title>Book Store</title>
     <style>
-        /* Common styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Logo and header */
-        .header {
-            text-align: center;
-            padding: 20px 0;
-        }
+      /* Common styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
 
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333;
-            border: 2px solid #333;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-        /* Navigation ribbon */
-        .ribbon {
-            width: 100%;
-            margin-left: -20px;
-            margin-right: -20px;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      /* Logo and header */
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+      }
 
-        .ribbon a {
-    color: #f4a460;
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-        }
+      .logo {
+        font-size: 32px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+        border: 2px solid #333;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
 
-        .search-container {
-            display: flex;
-            align-items: center;
-        }
+      /* Navigation ribbon */
+      .ribbon {
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .search-box {
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            outline: none;
-        }
+      .ribbon a {
+        color: #f4a460;
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+      }
 
-        .search-button {
-            background-color: #fff;
-            border: none;
-            padding: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .search-container {
+        display: flex;
+        align-items: center;
+        padding: 0px 15px;
+      }
 
-        /* Common button style */
+      .search-box {
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        outline: none;
+        height: 20px;
+      }
 
-        /* Ensure html and body elements take full height */
+      .search-button {
+        background-color: #fff;
+        border: none;
+        padding: 4.5px 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        /* Fixed positioning for the base ribbon */
-        .base-ribbon {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f4f4f4;  /* background color to ensure content behind isn't visible */
-        }
+      /* Common button style */
 
-        /* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
-        .container {
-            padding-bottom: 50px;  /* Adjusted padding to account for the height of the base ribbon */
-        }
+      /* Ensure html and body elements take full height */
 
-        html, body {
-            height: 100%;
-        }
+      /* Fixed positioning for the base ribbon */
+      .base-ribbon {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f4f4f4; /* background color to ensure content behind isn't visible */
+      }
 
-        /* Make the container take full height minus its padding */
-        .container {
-            min-height: calc(100% - 40px);  /* subtracting top and bottom padding */
-            display: flex;
-            flex-direction: column;
-        }
+      /* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
+      .container {
+        padding-bottom: 50px; /* Adjusted padding to account for the height of the base ribbon */
+      }
 
-        /* Make content grow to take available space */
-        .content {
-            flex: 1;
-        }
+      html,
+      body {
+        height: 100%;
+      }
 
+      /* Make the container take full height minus its padding */
+      .container {
+        min-height: calc(100% - 40px); /* subtracting top and bottom padding */
+        display: flex;
+        flex-direction: column;
+      }
 
-        .base-ribbon {
-            background-color: #eee;
-            padding: 10px 0;
-            text-align: center;
-            border-top: 1px solid #ccc;
-            margin-top: 20px;
-        }
+      /* Make content grow to take available space */
+      .content {
+        flex: 1;
+      }
 
-        .base-ribbon a {
-            color: #333;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 14px;
-        }
+      .base-ribbon {
+        background-color: #eee;
+        padding: 10px 0;
+        text-align: center;
+        border-top: 1px solid #ccc;
+        margin-top: 20px;
+      }
 
-        button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .buttonn {
-            background-color: #333;
-            border: none;
-            color: white;
-            padding: 10px 35px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-          }
+      .base-ribbon a {
+        color: #333;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 14px;
+      }
 
+      button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .buttonn {
+        background-color: #333;
+        border: none;
+        color: white;
+        padding: 10px 35px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      .cart-counts {
+        border: 1px solid black;
+        margin: 0px 16px;
+        border-radius: 5px;
+        padding: 8px 12px;
+      }
+
+      .cart-counts > a {
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .cart-icon {
+        height: 18px;
+        width: 18px;
+      }
+
+      .left-header-items {
+        display: flex;
+        align-items: center;
+      }
     </style>
-</head>
-<body>
+    <script>
+      var cartItems = [];
+
+      function saveCartItemsToStorage(itemToSave) {
+        localStorage.setItem("cartItems", JSON.stringify(itemToSave));
+      }
+
+      // Function to retrieve cart items from localStorage
+      function getCartItemsFromStorage() {
+        const storedCartItems = localStorage.getItem("cartItems");
+        if (storedCartItems) {
+          displayToCart(JSON.parse(storedCartItems));
+        }
+        return storedCartItems ? JSON.parse(storedCartItems) : [];
+      }
+
+      cartItems = getCartItemsFromStorage();
+      window.onload = function () {
+        displayToCart(cartItems);
+      };
+
+      function onAddCart(e) {
+        const isExist = cartItems.findIndex((item) => item.ISDN === e.ISDN);
+        if (isExist === -1) {
+          cartItems.push(e);
+        } else {
+          alert("Item already added to Cart.");
+        }
+        saveCartItemsToStorage(cartItems);
+        displayToCart(cartItems);
+      }
+
+      function displayToCart(items) {
+        var books = document.getElementById("books");
+        let totalPriceCounts = 0;
+
+        if (books) {
+          books.textContent = items.length;
+        }
+      }
+
+      function clearCart() {
+        cartItems = [];
+        var totalPrice = document.getElementById("total");
+        var books = document.getElementById("books");
+
+        totalPrice.textContent = 0;
+        books.textContent = 0;
+      }
+    </script>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <a href="/" class="logo">Book Store</a>
+      <div class="header">
+        <a href="/" class="logo">Book Store</a>
 
-            <!-- Show the login button if the user is logged in, otherwise show the login link -->
-            {% if 'username' in session %}
-                <p>Hello, {{ session['username'] }}!</p> 
-                <a href="{{ url_for('logout') }}" class="buttonn">Logout</a>
-            {% else %}
-                <a href="{{ url_for('login') }}" class="buttonn">Login</a>
-            {% endif %}
+        <div class="left-header-items">
+          {% if 'username' in session %}
+          <p>Hello, {{ session['username'] }}!</p>
+          {% endif %}
 
-            <!-- Show the sign-up button if the user is logged in, otherwise show the sign-up link -->
-            {% if 'username' in session %}
-            {% else %}
-                <a href="{{ url_for('signup') }}" class="buttonn">Sign up</a>
-            {% endif %}
-
-        </div>
-        <div class="ribbon">
-            <div>
-                <a href="/">Home</a>
-                
-                <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
-                {% if session['user_role'] == 'admin' %}
-                    <a href="{{ url_for('add_book') }}">Add Book</a>
-                {% endif %}
-            </div>
-            <div class="search-container">
-                <form action="{{ url_for('search') }}" method="get">
-                  <input name="query" type="text" class="search-box" placeholder="Search">
-                  <button type="submit" class="search-button">
-                    &#128269; 
-                  </button>
-                </form>
+          <div id="cart" class="cart-counts">
+            <a href="{{ url_for('cart')}}">
+              <div class="books">
+                <img
+                  class="cart-icon"
+                  src="{{url_for('static', filename='shopping-cart.png')}}"
+                />
+                <span id="books">0</span>
               </div>
-        </div>
-        
-<div class="base-ribbon">
-    <a href="{{ url_for('tou')}}">Terms of Use</a>
-    <a href="{{ url_for('help')}}">Help</a>
-    <a href="{{ url_for('contact_us')}}">Contact Us</a>
-</div>
+            </a>
+          </div>
 
-<div class="content">
-            {% block content %}{% endblock %}
+          <!-- Show the login button if the user is logged in, otherwise show the login link -->
+          {% if 'username' in session %}
+
+          <a href="{{ url_for('logout') }}" class="buttonn">Logout</a>
+          {% else %}
+          <a href="{{ url_for('login') }}" class="buttonn">Login</a>
+          {% endif %}
+
+          <!-- Show the sign-up button if the user is logged in, otherwise show the sign-up link -->
+          {% if 'username' in session %} {% else %}
+          <a href="{{ url_for('signup') }}" class="buttonn">Sign up</a>
+          {% endif %}
         </div>
+      </div>
+      <div class="ribbon">
+        <div>
+          <a href="/">Home</a>
+
+          <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
+          {% if session['role'] == 'admin' %}
+          <a href="{{ url_for('add_book') }}">Add Book</a>
+          {% endif %}
+
+          {% if session['role'] == 'admin' %}
+          <a href="{{ url_for('coupon') }}">Add Coupon</a>
+          {% endif %}
+        </div>
+        <div class="search-container">
+          <form action="{{ url_for('search') }}" method="get">
+            <input
+              name="query"
+              type="text"
+              class="search-box"
+              placeholder="Search"
+            />
+            <button type="submit" class="search-button">&#128269;</button>
+          </form>
+        </div>
+      </div>
+      <div id="chat-container"></div>
+     <script src="/static/chatbot-ui.js"></script>
+    <script>
+        createChatBot(host = 'http://localhost:5000/chat', botLogo = "./imgs/bot-logo.png",
+            title = "Chat Bot", welcomeMessage = "Hey, I am an AI Assistance", inactiveMsg = "Server is down, Please contact the developer to activate it", theme = "purple")
+    </script>
+
+
+      <div class="base-ribbon">
+        <a href="{{ url_for('tou')}}">Terms of Use</a>
+        <a href="{{ url_for('help')}}">Help</a>
+        <a href="{{ url_for('contact_us')}}">Contact Us</a>
+      </div>
+
+      <div class="content">{% block content %}{% endblock %}</div>
     </div>
-</body>
+  </body>
 </html>

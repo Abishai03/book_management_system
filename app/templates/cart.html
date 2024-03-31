@@ -1,0 +1,93 @@
+{% extends "base.html" %} {% block content %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <style>
+      /* Style for cart items */
+      .cart-item {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+      /* Style for buy button */
+      .buy-btn {
+        background-color: #4caf50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+    <div id="cart-items">
+      <!-- Cart items will be dynamically added here -->
+    </div>
+    <div class="coupon">Coupon  Code: <input id="coupon" type="text" name="coupon"></div>
+    <button class="buy-btn" onclick="buyItems()">Buy Items</button>
+
+    <script>
+      // Function to display cart items
+      let cartItemsToDisplay = getCartItemsFromStorage();
+
+      function displayCartItems() {
+        const cartContainer = document.getElementById("cart-items");
+        cartContainer.innerHTML = ""; // Clear existing items
+        cartItemsToDisplay.forEach((item) => {
+          const itemElement = document.createElement("div");
+          itemElement.classList.add("cart-item");
+          itemElement.innerHTML = `
+                    <p>Name: ${item.title}</p>
+                    <p>Price: $${item.price}</p>
+                    <button class="remove-btn" onclick="removeItem(${item.ISDN})">Remove</button>
+                `;
+          cartContainer.appendChild(itemElement);
+        });
+      }
+
+      function removeItem(itemId) {
+        cartItemsToDisplay = cartItemsToDisplay.filter(
+          (item) => item.ISDN !== itemId.toString()
+        );
+        console.log("clicked", cartItemsToDisplay);
+
+        saveCartItemsToStorage(cartItemsToDisplay); // Save updated cart items to storage
+        displayCartItems(cartItemsToDisplay); // Update cart display
+        displayToCart(cartItemsToDisplay);
+      }
+      
+      // Function to simulate buying items
+      async function buyItems() {
+        var code = document.getElementById("coupon").value;
+        // console.log(code);
+        console.log(cartItemsToDisplay);
+        const response = await fetch("/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ items: cartItemsToDisplay, coupon:code }),
+        });
+        let json = await response.json();
+        alert(json["message"])
+
+        // alert("Books purchased successfully! and send to email");
+      }
+
+      // Display cart items when the page loads
+      displayCartItems();
+    </script>
+  </body>
+</html>
+
+{% endblock %}

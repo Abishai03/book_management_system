@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Add a Book</title>
+    <title>Edit Book</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -46,10 +46,15 @@
         height: 100%;
         width: 100px;
       }
+
+      .thumbnail {
+        height: 160px;
+        width: 100px;
+      }
     </style>
   </head>
   <body>
-    <h1>Add a New Book</h1>
+    <h1>Edit Book</h1>
 
     {% if message %}
     <p>{{ message }}</p>
@@ -57,32 +62,67 @@
 
     <div class="book-container">
       <form
-        action="{{ url_for('add_book') }}"
+        action="{{ url_for('edit_book', book_id=book.id) }}"
         method="post"
         enctype="multipart/form-data"
       >
         <div class="input-section">
-          Title: <input type="text" name="title" required /><br />
+          Title:
+          <input
+            type="text"
+            name="title"
+            value="{{ book.title }}"
+            required
+          /><br />
         </div>
 
         <div class="input-section">
-          Author: <input type="text" name="author" required /><br />
+          Author:
+          <input
+            type="text"
+            name="author"
+            value="{{ book.author }}"
+            required
+          /><br />
         </div>
 
         <div class="input-section">
-          ISDN: <input type="text" name="ISDN" required /><br />
+          ISDN:
+          <input
+            type="text"
+            name="ISDN"
+            value="{{ book.ISDN }}"
+            required
+          /><br />
         </div>
 
         <div class="input-section">
-          Price: <input type="text" name="price" required /><br />
+          Price:
+          <input
+            type="text"
+            name="price"
+            value="{{ book.price }}"
+            required
+          /><br />
         </div>
 
         <div class="input-section">
-          Description: <textarea name="description" required></textarea><br />
+          Description:
+          <textarea name="description" required>{{ book.description }}</textarea
+          ><br />
         </div>
 
         <div class="input-section">
-          Thumbnail:
+          <label> Existing Thumbnail:</label>
+          <br />
+          <img
+            class="thumbnail"
+            src="{{url_for('static', filename=book.thumbnail)}}"
+            alt="Thumbnail"
+          /><br /><br />
+        </div>
+        <div class="input-section">
+          New Thumbnail:
           <input
             type="file"
             id="thumbnail"
@@ -91,7 +131,7 @@
           /><br /><br />
         </div>
 
-        <input type="submit" value="Add" />
+        <input type="submit" value="Update" />
       </form>
     </div>
   </body>

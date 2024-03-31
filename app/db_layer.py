@@ -1,7 +1,7 @@
 import json
 import os
 
-db_file = 'data/books.json'
+db_file = 'app/data/books.json'
 
 def get_books_from_json() -> dict:
     try:
