@@ -4,8 +4,6 @@ from langchain_experimental.sql import SQLDatabaseChain
 from langchain_community.utilities import SQLDatabase
 from dotenv import load_dotenv
 load_dotenv()
-from langchain_community.agent_toolkits import SQLDatabaseToolkit
-from langchain.agents import create_sql_agent
 
 
 OpenAI_Key =  os.getenv('OpenAI')

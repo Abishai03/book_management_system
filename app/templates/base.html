@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/chatbot-ui.css">
+    <link rel="stylesheet" href="/static/chatbot-ui.css" />
 
     <title>Book Store</title>
     <style>
@@ -196,7 +196,8 @@
       };
 
       function onAddCart(e) {
-        const isExist = cartItems.findIndex((item) => item.ISDN === e.ISDN);
+        const isExist =
+          cartItems?.findIndex((item) => item.ISDN === e.ISDN) ?? -1;
         if (isExist === -1) {
           cartItems.push(e);
         } else {
@@ -268,11 +269,8 @@
           <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
           {% if session['role'] == 'admin' %}
           <a href="{{ url_for('add_book') }}">Add Book</a>
-          {% endif %}
-
-          {% if session['role'] == 'admin' %}
-          <a href="{{ url_for('coupon') }}">Add Coupon</a>
-          {% endif %}
+          {% endif %} 
+          <a href="{{ url_for('coupon') }}">Coupon</a>
         </div>
         <div class="search-container">
           <form action="{{ url_for('search') }}" method="get">
@@ -287,12 +285,18 @@
         </div>
       </div>
       <div id="chat-container"></div>
-     <script src="/static/chatbot-ui.js"></script>
-    <script>
-        createChatBot(host = 'http://localhost:5000/chat', botLogo = "./imgs/bot-logo.png",
-            title = "Chat Bot", welcomeMessage = "Hey, I am an AI Assistance", inactiveMsg = "Server is down, Please contact the developer to activate it", theme = "purple")
-    </script>
-
+      <script src="/static/chatbot-ui.js"></script>
+      <script>
+        createChatBot(
+          (host = "http://localhost:5000/chat"),
+          (botLogo = "./imgs/bot-logo.png"),
+          (title = "Chat Bot"),
+          (welcomeMessage = "Hey, I am an AI Assistance"),
+          (inactiveMsg =
+            "Server is down, Please contact the developer to activate it"),
+          (theme = "purple")
+        );
+      </script>
 
       <div class="base-ribbon">
         <a href="{{ url_for('tou')}}">Terms of Use</a>

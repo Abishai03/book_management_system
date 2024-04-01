@@ -36,9 +36,26 @@ run.py
 ### Core Implementation:
 
 - **Flask**: This application is built using Flask, a micro web framework written in Python.
-- **Data Storage**: Book data is stored in a JSON file (`books.json`) which acts as a simple database.
+- **Data Storage**: 
+  All data[books, user and coupon] are saved in SQLite database.
 - **Templates**: Flask's Jinja2 templating engine is used to render the HTML views.
 - **Modular Design**: The application follows a modular design with separate files for routes and app initialization.
+- **Routes and Views**:
+-   Home Page (/): Displays a list of available books.
+- Signup (/signup): Allows new users to register for an account.
+- Login (/login): Provides user authentication functionality.
+- Logout (/logout): Logs out the current user.
+- Add Book (/add_book): Allows administrators to add new books to the database.
+- Edit Book (/edit_book/<int:book_id>): Allows administrators to edit details of existing books.
+- Delete Book (/delete_book/<int:book_id>): Allows administrators to delete books from the database.
+- Search (/search): Allows users to search for books by title.
+- Chat (/chat): Provides a chat interface for interacting with a chatbot (not implemented in the provided code).
+- Cart (/cart): Allows users to view and purchase books in their cart.
+- Help (/help): Displays help information.
+- Terms of Use (/tou): Displays terms of use.
+- Contact Us (/contact_us): Displays contact information.
+- Coupon Management (/coupon): Allows administrators to manage coupons.
+
 
 ### Setup & Run:
 
@@ -54,31 +71,32 @@ password = ''
 4. Access the application in a browser using the URL: `http://127.0.0.1:5000/`.
 
 ## Database Schema
-All the data is stored in JSON file.
-**books.json**: Stores the book data.
-**users.json**: Stores the user data.
+All the data is stored in SQLite.
+- **User**: Represents a user of the application, with attributes such as username, password, email, and role.
+- **Book**: Represents a book available in the bookstore, with attributes including title, author, ISDN, price, description, and thumbnail.
+- **Coupon**: Represents a coupon that users can apply for discounts, with attributes such as code, price, and expiration date.
 
 Only the admin user can add new books to the database.
 
 ## To-Do's (Future Improvements)
 
 - [✓] Add a search bar to the homepage to filter the books.
-- [ ] Add a filter to the homepage to filter books by title, author, ISBN, price, and description.
+- [✓] Add a filter to the homepage to filter books by title, author, ISBN, price, and description.
 - [✓] Add a "add to cart" button to the homepage.
 - [✓] Add a "Delete Book" button to the admin interface.
 - [✓] Add a "Edit Book" button to the admin interface.
-- [ ] Add a filter to the admin interface to filter books by title, author, ISBN, price, and description.
+- [✓] Add a filter to the admin interface to filter books by title, author, ISBN, price, and description.
 - [✓] Add a "Logout" button to the admin interface.
 - [✓] Add a "cart" page to the application.
 - [✓] The cart page will list all the books in the cart.
 - [ ] Add a "checkout" button to the cart page.
 - [ ] Add a "path" field to the database, to store the path to the location of the ebook.
 - [ ] Add a "path" field to the database, to store the path to the cover image of the book.
-- [ ] Add cover image of the books to the homepage.
+- [✓] Add cover image of the books to the homepage.
 - [✓] Add cover image of the books to the admin interface.
 - [✓] Add cover image of the books to the cart page.
-- [ ] Beautify the application's UI.
-
+- [✓] Beautify the application's UI.
+- [✓] Chat system to talk about listedbooks.
 
 ---
 

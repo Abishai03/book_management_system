@@ -2,6 +2,7 @@
 from flask import  Flask, render_template, request, redirect, url_for, session, flash
 from .db_layer import *
 import logging
+from datetime import timedelta
 from datetime import timedelta, datetime
 from flask_sqlalchemy import SQLAlchemy
 # from .chat_db import db_chain
@@ -11,7 +12,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from datetime import datetime, date
 from .send_email import send_book
-logging.basicConfig(filename='app.log', level=logging.INFO)
+# logging.basicConfig(filename='app.log', level=logging.INFO)
 
 
 
@@ -59,6 +60,7 @@ class Coupon(db.Model):
 def index():
 
     books = Book.query.all()
+    print(books)
     book_list = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/empty-book-cover.jpeg' } for book in books]
 
     # book_list = get_books_from_json()
@@ -299,11 +301,12 @@ def cart():
             current_date = datetime.now().date()
             if current_date <= coupon.expiration_date:
                 minus_total = coupon.price
+        
         books = generate_html(request.json['items'], minus_total)
         status = send_book(recipient=session['email'],content=books)
         if status:
-            return jsonify({"message":"Success! Books purchased successfully! and send to email"})
-        
+            return jsonify({"success": "true", "message":"Success! Books purchased successfully! and send to email"})
+
         return jsonify({"message":"Failure! Something went wrong"})
     
     else:
@@ -326,8 +329,8 @@ def contact_us():
 def coupon():
     if 'username' not in session:
         return redirect(url_for('index'))
-    if session['role'] != 'admin':
-        return redirect(url_for('index'))
+    # if session['role'] != 'admin':
+    #     return redirect(url_for('index'))
 
     if request.method == 'POST':
         coupon = request.form['coupon']

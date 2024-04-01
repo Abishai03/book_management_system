@@ -26,15 +26,51 @@
         margin: 4px 2px;
         cursor: pointer;
       }
+      .coupon {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+        justify-content: start;
+        padding: 0px 8px 0px 0px;
+      }
+      .coupon > input {
+        height: 40px;
+        width: 100%;
+        font-size: 18px;
+      }
+      .total-price {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 8px 0px;
+      }
+      .cart-items {
+        font-size: 18px;
+        padding: 16px 0px;
+      }
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+      }
+      h1 {
+        padding: 16px 8px 0px 0px;
+      }
     </style>
   </head>
   <body>
     <h1>Shopping Cart</h1>
-    <div id="cart-items">
+    <div id="cart-items" class="cart-items">
       <!-- Cart items will be dynamically added here -->
     </div>
-    <div class="coupon">Coupon  Code: <input id="coupon" type="text" name="coupon"></div>
-    <button class="buy-btn" onclick="buyItems()">Buy Items</button>
+    <div id="total-price" class="total-price"></div>
+
+    <div class="coupon">
+      <label>Coupon Code: </label>
+      <input id="coupon" type="text" name="coupon" />
+    </div>
+    <button class="buy-btn" id="buy-button" onclick="buyItems()">
+      Buy Items
+    </button>
 
     <script>
       // Function to display cart items
@@ -42,45 +78,64 @@
 
       function displayCartItems() {
         const cartContainer = document.getElementById("cart-items");
+        const totalPriceContainer = document.getElementById("total-price");
+        const buyButton = document.getElementById("buy-button");
+
         cartContainer.innerHTML = ""; // Clear existing items
+        let totalPrice = 0;
+        if (cartItemsToDisplay.length === 0) {
+          buyButton.disabled = true;
+          buyButton.style.backgroundColor = "gray";
+          buyButton.style.cursor = "auto";
+          cartContainer.innerHTML = "No Books Added To Cart!";
+        }
+
         cartItemsToDisplay.forEach((item) => {
+          totalPrice += item.price;
           const itemElement = document.createElement("div");
           itemElement.classList.add("cart-item");
           itemElement.innerHTML = `
-                    <p>Name: ${item.title}</p>
-                    <p>Price: $${item.price}</p>
+                    <div>
+                      <p>Name: ${item.title}</p>
+                      <p>Price: $${item.price}</p>
+                    </div>
                     <button class="remove-btn" onclick="removeItem(${item.ISDN})">Remove</button>
                 `;
           cartContainer.appendChild(itemElement);
         });
+        totalPriceContainer.innerText = `Total: $${totalPrice.toFixed(2)}`;
       }
 
       function removeItem(itemId) {
         cartItemsToDisplay = cartItemsToDisplay.filter(
           (item) => item.ISDN !== itemId.toString()
         );
-        console.log("clicked", cartItemsToDisplay);
 
         saveCartItemsToStorage(cartItemsToDisplay); // Save updated cart items to storage
         displayCartItems(cartItemsToDisplay); // Update cart display
         displayToCart(cartItemsToDisplay);
       }
-      
+
       // Function to simulate buying items
       async function buyItems() {
         var code = document.getElementById("coupon").value;
-        // console.log(code);
-        console.log(cartItemsToDisplay);
         const response = await fetch("/cart", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ items: cartItemsToDisplay, coupon:code }),
+          body: JSON.stringify({ items: cartItemsToDisplay, coupon: code }),
         });
         let json = await response.json();
-        alert(json["message"])
-
+        alert(json["message"]);
+        if (json["success"] === "true") {
+          const couponInput = document.getElementById("coupon");
+          couponInput.value = "";
+          cartItemsToDisplay = [];
+          saveCartItemsToStorage([]);
+          displayCartItems([]);
+          displayToCart([]);
+        }
         // alert("Books purchased successfully! and send to email");
       }
 
