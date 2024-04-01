@@ -84,6 +84,7 @@
             </button>
           </td>
           {% endif %}
+          {% if session['role'] == 'admin' %}
           <td>
             <a class="edit" href="{{ url_for('edit_book', book_id=book.id) }}">
               <img
@@ -102,6 +103,7 @@
               </button>
             </form>
           </td>
+          {% endif %} 
         </tr>
         {% endfor %}
       </tbody>
