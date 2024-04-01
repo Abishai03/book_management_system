@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from datetime import datetime, date
 from .send_email import send_book
-# logging.basicConfig(filename='app.log', level=logging.INFO)
+logging.basicConfig(filename='app.log', level=logging.INFO)
 
 
 

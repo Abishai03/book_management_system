@@ -1,7 +1,9 @@
+wheel==0.42.0
 Flask==2.3.2
 Flask-SQLAlchemy==3.0.5
 Flask-Cors==1.10.3
 Flask-Migrate==4.0.7
+openai==0.28.0
 langchain==0.1.13
 langchain-community==0.0.29
 langchain-experimental==0.0.55
