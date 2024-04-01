@@ -60,7 +60,6 @@ class Coupon(db.Model):
 def index():
 
     books = Book.query.all()
-    print(books)
     book_list = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/empty-book-cover.jpeg' } for book in books]
 
     # book_list = get_books_from_json()
@@ -254,7 +253,7 @@ def search_books(query):
     books = Book.query.filter(Book.title.ilike('%'+str(query)+"%")).all()
     
     # Prepare the response
-    results = [{'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description } for book in books]
+    results = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/empty-book-cover.jpeg'  } for book in books]
 
     return results
 
@@ -265,7 +264,6 @@ def chat():
     if request.method == 'POST':
         message = request.json['message']
         response = db_chain.run(message)
-        print("response", response)
     
         return [{"text":response}]
 
