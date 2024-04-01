@@ -284,7 +284,9 @@
           </form>
         </div>
       </div>
+      {% if 'username' in session %}
       <div id="chat-container"></div>
+      {% endif %} 
       <script src="/static/chatbot-ui.js"></script>
       <script>
         createChatBot(

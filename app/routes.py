@@ -5,7 +5,7 @@ import logging
 from datetime import timedelta
 from datetime import timedelta, datetime
 from flask_sqlalchemy import SQLAlchemy
-# from .chat_db import db_chain
+from .chat_db import db_chain
 from flask import jsonify
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
@@ -211,8 +211,6 @@ def login():
             session['last_activity'] = datetime.now()
             logging.info('%s logged in successfully', username)
             
-            logging.info('%s logged in successfully', username)
-            
             return redirect(url_for('index'))
         else:
             error = 'Invalid username or password.'
@@ -259,12 +257,12 @@ def search_books(query):
 
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
-    if 'username' not in session:
-        return redirect(url_for('login'))
     if request.method == 'POST':
+        
         message = request.json['message']
+        print(message)
         response = db_chain.run(message)
-    
+        print("response: ", response)
         return [{"text":response}]
 
 def generate_html(book_list, coupon):
