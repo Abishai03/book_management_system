@@ -374,7 +374,7 @@ def signup():
         # Check if username is already taken
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
-            return render_template('login.html', error="Username already exists.")
+            return render_template('signup.html', error="Username already exists.")
         
         # Create new user
         new_user = User(username=username, password=password1, role=role, email=email)
