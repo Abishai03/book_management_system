@@ -270,7 +270,9 @@
           {% if session['role'] == 'admin' %}
           <a href="{{ url_for('add_book') }}">Add Book</a>
           {% endif %} 
+          {% if 'username' in session %} 
           <a href="{{ url_for('coupon') }}">Coupon</a>
+          {% endif %} 
         </div>
         <div class="search-container">
           <form action="{{ url_for('search') }}" method="get">
