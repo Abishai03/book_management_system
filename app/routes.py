@@ -83,6 +83,7 @@ def add_book():
             ISDN = request.form['ISDN']
             price = float(request.form['price'])
             description = request.form['description']
+            thumbnail_path = ""
             
             # Handle thumbnail upload
             thumbnail = request.files['thumbnail']
@@ -104,7 +105,7 @@ def add_book():
 
 
                 
-            thumbnail_path = thumbnail_path.replace("app/","")
+                thumbnail_path = thumbnail_path.replace("app/","")
             # Create a new book object with the extracted details
             new_book = Book(
                 title=title,
