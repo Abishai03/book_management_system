@@ -251,7 +251,7 @@
           <!-- Show the login button if the user is logged in, otherwise show the login link -->
           {% if 'username' in session %}
 
-          <a href="{{ url_for('logout') }}" class="buttonn">Logout</a>
+          <a href="{{ url_for('logout') }}" class="buttonn"  id="removeLocalStorage" >Logout</a>
           {% else %}
           <a href="{{ url_for('login') }}" class="buttonn">Login</a>
           {% endif %}
@@ -298,8 +298,14 @@
           (welcomeMessage = "Hey, I am an AI Assistance"),
           (inactiveMsg =
             "Server is down, Please contact the developer to activate it"),
-          (theme = "purple")
+          (theme = "black")
         );
+
+        document.getElementById('removeLocalStorage').addEventListener('click', function() {
+          // Remove item from local storage
+          localStorage.removeItem('cartItems');
+          // alert('Local storage item removed!');
+      });
       </script>
 
       <div class="base-ribbon">
