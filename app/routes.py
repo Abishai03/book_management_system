@@ -294,11 +294,16 @@ def cart():
         code = request.json['coupon']
         coupon = Coupon.query.filter_by(code=code).first()
         minus_total = 0
-        if coupon:
+        print(coupon)
+        if coupon != None:
             current_date = datetime.now().date()
             if current_date <= coupon.expiration_date:
                 minus_total = coupon.price
         
+            else:
+                return jsonify({"message":"Coupon has expired! Please use another one"})
+        else:
+                return jsonify({"message":"Not a Valid Coupon!"})
         books = generate_html(request.json['items'], minus_total)
         status = send_book(recipient=session['email'],content=books)
         if status:

@@ -173,26 +173,33 @@
         display: flex;
         align-items: center;
       }
+
+      #current-user-email {
+        display: none;
+      }
     </style>
     <script>
       var cartItems = [];
 
       function saveCartItemsToStorage(itemToSave) {
-        localStorage.setItem("cartItems", JSON.stringify(itemToSave));
+        const currenUserEmail = document.getElementById("current-user-email");
+        const email = currenUserEmail.innerText;
+        localStorage.setItem(email, JSON.stringify(itemToSave));
       }
 
       // Function to retrieve cart items from localStorage
       function getCartItemsFromStorage() {
-        const storedCartItems = localStorage.getItem("cartItems");
+        const currenUserEmail = document.getElementById("current-user-email");
+        const email = currenUserEmail.innerText;
+        const storedCartItems = localStorage.getItem(email);
         if (storedCartItems) {
           displayToCart(JSON.parse(storedCartItems));
         }
         return storedCartItems ? JSON.parse(storedCartItems) : [];
       }
 
-      cartItems = getCartItemsFromStorage();
       window.onload = function () {
-        displayToCart(cartItems);
+        getCartItemsFromStorage();
       };
 
       function onAddCart(e) {
@@ -233,6 +240,7 @@
 
         <div class="left-header-items">
           {% if 'username' in session %}
+          <p id="current-user-email">{{session['email']}}</p>
           <p>Hello, {{ session['username'] }}!</p>
           {% endif %}
 
@@ -251,7 +259,12 @@
           <!-- Show the login button if the user is logged in, otherwise show the login link -->
           {% if 'username' in session %}
 
-          <a href="{{ url_for('logout') }}" class="buttonn"  id="removeLocalStorage" >Logout</a>
+          <a
+            href="{{ url_for('logout') }}"
+            class="buttonn"
+            id="removeLocalStorage"
+            >Logout</a
+          >
           {% else %}
           <a href="{{ url_for('login') }}" class="buttonn">Login</a>
           {% endif %}
@@ -269,10 +282,9 @@
           <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
           {% if session['role'] == 'admin' %}
           <a href="{{ url_for('add_book') }}">Add Book</a>
-          {% endif %} 
-          {% if 'username' in session %} 
+          {% endif %} {% if 'username' in session %}
           <a href="{{ url_for('coupon') }}">Coupon</a>
-          {% endif %} 
+          {% endif %}
         </div>
         <div class="search-container">
           <form action="{{ url_for('search') }}" method="get">
@@ -288,7 +300,7 @@
       </div>
       {% if 'username' in session %}
       <div id="chat-container"></div>
-      {% endif %} 
+      {% endif %}
       <script src="/static/chatbot-ui.js"></script>
       <script>
         createChatBot(
@@ -301,11 +313,13 @@
           (theme = "black")
         );
 
-        document.getElementById('removeLocalStorage').addEventListener('click', function() {
-          // Remove item from local storage
-          localStorage.removeItem('cartItems');
-          // alert('Local storage item removed!');
-      });
+        document
+          .getElementById("removeLocalStorage")
+          .addEventListener("click", function () {
+            // Remove item from local storage
+            localStorage.removeItem("cartItems");
+            // alert('Local storage item removed!');
+          });
       </script>
 
       <div class="base-ribbon">

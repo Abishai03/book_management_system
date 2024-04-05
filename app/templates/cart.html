@@ -59,6 +59,9 @@
   </head>
   <body>
     <h1>Shopping Cart</h1>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
     <div id="cart-items" class="cart-items">
       <!-- Cart items will be dynamically added here -->
     </div>
