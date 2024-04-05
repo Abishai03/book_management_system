@@ -7,7 +7,6 @@ from datetime import timedelta, datetime
 from flask_sqlalchemy import SQLAlchemy
 from .chat_db import db_chain
 from flask import jsonify
-from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from datetime import datetime, date
@@ -25,7 +24,6 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 # Configuration variables
 app.config['UPLOAD_FOLDER'] = 'app/static/uploads'
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
