@@ -1,12 +1,98 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/chatbot-ui.css" />
 
-    <title>Book Store</title>
-    <style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/chatbot-ui.css" />
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tags
+  -->
+  <title>Booken - Get Your New Book Collections</title>
+  <meta name="title" content="Booken - Get Your New Book Collections">
+  <meta name="description" content="This is a Book eCommerce html template made by codewithsadee">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="/static/favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Work+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- 
+    - preload images
+  -->
+  <link rel="preload" as="image" href="/static/images/hero-banner.png">
+  <link rel="preload" as="image" href="/static/images/hero-bg.jpg">
+
+
+  <title>Book Store</title>
+  <!-- <style>
+      /* Common styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Logo and header */
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 32px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+        border: 2px solid #333;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      /* Navigation ribbon */
+      .ribbon {
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .ribbon a {
+        color: #f4a460;
+        color: #fff;
+        text-decoration: none;
+        margin:    <style>
       /* Common styles */
       body {
         font-family: Arial, sans-serif;
@@ -177,158 +263,502 @@
       #current-user-email {
         display: none;
       }
-    </style>
-    <script>
-      var cartItems = [];
-
-      function saveCartItemsToStorage(itemToSave) {
-        const currenUserEmail = document.getElementById("current-user-email");
-        const email = currenUserEmail.innerText;
-        localStorage.setItem(email, JSON.stringify(itemToSave));
+    </style> 0 15px;
       }
 
-      // Function to retrieve cart items from localStorage
-      function getCartItemsFromStorage() {
-        const currenUserEmail = document.getElementById("current-user-email");
-        const email = currenUserEmail.innerText;
-        const storedCartItems = localStorage.getItem(email);
-        if (storedCartItems) {
-          displayToCart(JSON.parse(storedCartItems));
-        }
-        return storedCartItems ? JSON.parse(storedCartItems) : [];
+      .search-container {
+        display: flex;
+        align-items: center;
+        padding: 0px 15px;
       }
 
-      window.onload = function () {
-        getCartItemsFromStorage();
-      };
-
-      function onAddCart(e) {
-        const isExist =
-          cartItems?.findIndex((item) => item.ISDN === e.ISDN) ?? -1;
-        if (isExist === -1) {
-          cartItems.push(e);
-        } else {
-          alert("Item already added to Cart.");
-        }
-        saveCartItemsToStorage(cartItems);
-        displayToCart(cartItems);
+      .search-box {
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        outline: none;
+        height: 20px;
       }
 
-      function displayToCart(items) {
-        var books = document.getElementById("books");
-        let totalPriceCounts = 0;
-
-        if (books) {
-          books.textContent = items.length;
-        }
+      .search-button {
+        background-color: #fff;
+        border: none;
+        padding: 4.5px 5px;
+        border-radius: 5px;
+        cursor: pointer;
       }
 
-      function clearCart() {
-        cartItems = [];
-        var totalPrice = document.getElementById("total");
-        var books = document.getElementById("books");
+      /* Common button style */
 
-        totalPrice.textContent = 0;
-        books.textContent = 0;
+      /* Ensure html and body elements take full height */
+
+      /* Fixed positioning for the base ribbon */
+      .base-ribbon {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f4f4f4; /* background color to ensure content behind isn't visible */
       }
-    </script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <a href="/" class="logo">Book Store</a>
 
-        <div class="left-header-items">
-          {% if 'username' in session %}
-          <p id="current-user-email">{{session['email']}}</p>
-          <p>Hello, {{ session['username'] }}!</p>
-          {% endif %}
+      /* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
+      .container {
+        padding-bottom: 50px; /* Adjusted padding to account for the height of the base ribbon */
+      }
 
-          <div id="cart" class="cart-counts">
-            <a href="{{ url_for('cart')}}">
-              <div class="books">
-                <img
-                  class="cart-icon"
-                  src="{{url_for('static', filename='shopping-cart.png')}}"
-                />
-                <span id="books">0</span>
-              </div>
-            </a>
+      html,
+      body {
+        height: 100%;
+      }
+
+      /* Make the container take full height minus its padding */
+      .container {
+        min-height: calc(100% - 40px); /* subtracting top and bottom padding */
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Make content grow to take available space */
+      .content {
+        flex: 1;
+      }
+
+      .base-ribbon {
+        background-color: #eee;
+        padding: 10px 0;
+        text-align: center;
+        border-top: 1px solid #ccc;
+        margin-top: 20px;
+      }
+
+      .base-ribbon a {
+        color: #333;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 14px;
+      }
+
+      button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .buttonn {
+        background-color: #333;
+        border: none;
+        color: white;
+        padding: 10px 35px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      .cart-counts {
+        border: 1px solid black;
+        margin: 0px 16px;
+        border-radius: 5px;
+        padding: 8px 12px;
+      }
+
+      .cart-counts > a {
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .cart-icon {
+        height: 18px;
+        width: 18px;
+      }
+
+      .left-header-items {
+        display: flex;
+        align-items: center;
+      }
+
+      #current-user-email {
+        display: none;
+      }
+    </style> -->
+  <script>
+    var cartItems = [];
+
+    function saveCartItemsToStorage(itemToSave) {
+      const currenUserEmail = document.getElementById("current-user-email");
+      const email = currenUserEmail.innerText;
+      localStorage.setItem(email, JSON.stringify(itemToSave));
+    }
+
+    // Function to retrieve cart items from localStorage
+    function getCartItemsFromStorage() {
+      const currenUserEmail = document.getElementById("current-user-email");
+      const email = currenUserEmail.innerText;
+      const storedCartItems = localStorage.getItem(email);
+      if (storedCartItems) {
+        displayToCart(JSON.parse(storedCartItems));
+      }
+      return storedCartItems ? JSON.parse(storedCartItems) : [];
+    }
+
+    window.onload = function () {
+      getCartItemsFromStorage();
+    };
+
+    function onAddCart(e) {
+      const isExist =
+        cartItems?.findIndex((item) => item.ISDN === e.ISDN) ?? -1;
+      if (isExist === -1) {
+        cartItems.push(e);
+      } else {
+        alert("Item already added to Cart.");
+      }
+      saveCartItemsToStorage(cartItems);
+      displayToCart(cartItems);
+    }
+
+    function displayToCart(items) {
+      var books = document.getElementById("books");
+      let totalPriceCounts = 0;
+
+      if (books) {
+        books.textContent = items.length;
+      }
+    }
+
+    function clearCart() {
+      cartItems = [];
+      var totalPrice = document.getElementById("total");
+      var books = document.getElementById("books");
+
+      totalPrice.textContent = 0;
+      books.textContent = 0;
+    }
+  </script>
+</head>
+
+<body>
+
+  <header class="header" data-header>
+    <div class="header-top">
+      <div class="container">
+
+        <a href="#" class="logo">
+          <img src="/static/images/logo.svg" width="138" height="28" alt="booken home">
+        </a>
+
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search our store" class="input-field">
+
+          <button class="btn btn-primary">Search</button>
+        </div>
+
+        {% if 'username' in session %}
+        <p id="current-user-email">{{session['email']}}</p>
+        <p>Hello, {{ session['username'] }}!</p>
+        {% endif %}
+
+        <div class="header-action">
+
+          <!-- <div id="cart" class="cart-counts ">
+              <a href="{{ url_for('cart')}}">
+                <div class="books">
+                  <img
+                    class="cart-icon"
+                    src="{{url_for('static', filename='shopping-cart.png')}}"
+                  />
+                  <span id="books">0</span>
+                </div>
+              </a>
+            </div> -->
+
+
+          <a id="cart" href="{{ url_for('cart')}}" class="cart-counts header-action-btn" aria-label="cart" title="Cart">
+            <span id="books" class="span">0</span>
+
+            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+          </a>
+
+          <button class="nav-open-btn" aria-label="open menu" title="Open Menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <!-- <button class="header-action-btn" aria-label="user" title="User">
+            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+
+            <ul id="nav-ul" class="dropdown">
+              <li id="nav-li"><a id="nav-a" href="#">Log out</a></li>
+              <li id="nav-li"><a id="nav-a" href="#">Update</a></li>
+            </ul>
+
+          </button> -->
+          <div class="dropdown">
+            <button class="dropdown-btn">
+            <ion-icon name="person-outline" aria-hidden="false"></ion-icon>
+            </button>
+            <!-- <button class=" dropdown-btn header-action-btn" aria-label="user" title="User"> -->
+            <!-- <ion-icon name="person-outline" aria-hidden="false"></ion-icon> -->
+
+            <div class="dropdown-content">
+              <a href="/login">Sign In</a>
+              <a href="/logout">Sign Out</a>
+              <a href="/signup">Sign Up</a>
+
+            </div>
+          </div>
+          
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="header-bottom" data-navbar>
+      <div class="container">
+
+        <nav class="navbar">
+
+          <button class="nav-close-btn" data-nav-toggler aria-label="clsoe menu" title="Clsoe Menu">
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <div class="navbar-top">
+            <input type="search" name="search" placeholder="Search our store" class="input-field">
+
+            <button class="search-btn" aria-label="Search">
+              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
           </div>
 
-          <!-- Show the login button if the user is logged in, otherwise show the login link -->
-          {% if 'username' in session %}
+          <ul class="navbar-list">
 
-          <a
-            href="{{ url_for('logout') }}"
-            class="buttonn"
-            id="removeLocalStorage"
-            >Logout</a
-          >
-          {% else %}
-          <a href="{{ url_for('login') }}" class="buttonn">Login</a>
-          {% endif %}
+            <li>
+              <a href="/" class="navbar-link">Home</a>
+            </li>
 
-          <!-- Show the sign-up button if the user is logged in, otherwise show the sign-up link -->
-          {% if 'username' in session %} {% else %}
-          <a href="{{ url_for('signup') }}" class="buttonn">Sign up</a>
-          {% endif %}
-        </div>
+            <li>
+              <a href="/coupon" class="navbar-link">Coupon</a>
+            </li>
+
+            <li>
+              <a href="#" class="navbar-link">Shop</a>
+            </li>
+
+            <li>
+              <a href="#" class="navbar-link">About Us</a>
+            </li>
+
+            <li>
+              <a href="#" class="navbar-link">Contact</a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+        <a href="tel:+0123456789" class="header-contact-link">
+          <ion-icon name="headset-outline" aria-hidden="true"></ion-icon>
+
+          <span class="span">(+01)-234-56789</span>
+        </a>
+
       </div>
-      <div class="ribbon">
-        <div>
-          <a href="/">Home</a>
-
-          <!-- Show the add book button if the user is logged in as an admin, otherwise show the login link -->
-          {% if session['role'] == 'admin' %}
-          <a href="{{ url_for('add_book') }}">Add Book</a>
-          {% endif %} {% if 'username' in session %}
-          <a href="{{ url_for('coupon') }}">Coupon</a>
-          {% endif %}
-        </div>
-        <div class="search-container">
-          <form action="{{ url_for('search') }}" method="get">
-            <input
-              name="query"
-              type="text"
-              class="search-box"
-              placeholder="Search"
-            />
-            <button type="submit" class="search-button">&#128269;</button>
-          </form>
-        </div>
-      </div>
-      {% if 'username' in session %}
-      <div id="chat-container"></div>
-      {% endif %}
-      <script src="/static/chatbot-ui.js"></script>
-      <script>
-        createChatBot(
-          (host = "http://localhost:5000/chat"),
-          (botLogo = "./imgs/bot-logo.png"),
-          (title = "Chat Bot"),
-          (welcomeMessage = "Hey, I am an AI Assistance"),
-          (inactiveMsg =
-            "Server is down, Please contact the developer to activate it"),
-          (theme = "black")
-        );
-
-        document
-          .getElementById("removeLocalStorage")
-          .addEventListener("click", function () {
-            // Remove item from local storage
-            localStorage.removeItem("cartItems");
-            // alert('Local storage item removed!');
-          });
-      </script>
-
-      <div class="base-ribbon">
-        <a href="{{ url_for('tou')}}">Terms of Use</a>
-        <a href="{{ url_for('help')}}">Help</a>
-        <a href="{{ url_for('contact_us')}}">Contact Us</a>
-      </div>
-
-      <div class="content">{% block content %}{% endblock %}</div>
     </div>
-  </body>
+
+    <div class="overlay" data-overlay data-nav-toggler></div>
+  </header>
+
+  <div class="content">{% block content %}{% endblock %}</div>
+
+  <footer class="footer has-bg-image" style="background-image: url('/static/images/section-bg.jpg')">
+
+    <div class="footer-top section">
+      <div class="container grid-list">
+
+        <div class="footer-brand">
+
+          <a href="#" class="logo">
+            <img src="/static/images/logo.svg" width="138" height="28" alt="booken home">
+          </a>
+
+          <p class="footer-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor inci ut labore et dolore
+            consectetur
+            adipisicing elit sed do eiusmod tempor.
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Corporate</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Careers</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">About Us</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Contact Us</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">FAQs</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Vendors</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Information</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Online Store</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Privacy Policy</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Refund Policy</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Shipping Policy</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Terms of Service</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Services</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Grooming</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Positive Dog Training</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Veterinary Services</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Insurance</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Book Writing</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="copyright">
+          Copyright 2022 | Made With Love by codewithsadee.
+        </p>
+
+        <img src="/static/images/payment-mehtod.png" width="311" height="30" loading="lazy" alt="Payment method"
+          class="w-100">
+
+      </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a>
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="/static/js/script.js" defer></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+
 </html>
