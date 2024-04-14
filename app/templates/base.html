@@ -44,349 +44,6 @@
 
 
   <title>Book Store</title>
-  <!-- <style>
-      /* Common styles */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      /* Logo and header */
-      .header {
-        text-align: center;
-        padding: 20px 0;
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .logo {
-        font-size: 32px;
-        font-weight: bold;
-        text-decoration: none;
-        color: #333;
-        border: 2px solid #333;
-        padding: 10px 20px;
-        border-radius: 5px;
-      }
-
-      /* Navigation ribbon */
-      .ribbon {
-        width: 100%;
-        background-color: #333;
-        color: #fff;
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .ribbon a {
-        color: #f4a460;
-        color: #fff;
-        text-decoration: none;
-        margin:    <style>
-      /* Common styles */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      /* Logo and header */
-      .header {
-        text-align: center;
-        padding: 20px 0;
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .logo {
-        font-size: 32px;
-        font-weight: bold;
-        text-decoration: none;
-        color: #333;
-        border: 2px solid #333;
-        padding: 10px 20px;
-        border-radius: 5px;
-      }
-
-      /* Navigation ribbon */
-      .ribbon {
-        width: 100%;
-        background-color: #333;
-        color: #fff;
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .ribbon a {
-        color: #f4a460;
-        color: #fff;
-        text-decoration: none;
-        margin: 0 15px;
-      }
-
-      .search-container {
-        display: flex;
-        align-items: center;
-        padding: 0px 15px;
-      }
-
-      .search-box {
-        padding: 5px;
-        border: none;
-        border-radius: 5px;
-        margin-right: 10px;
-        outline: none;
-        height: 20px;
-      }
-
-      .search-button {
-        background-color: #fff;
-        border: none;
-        padding: 4.5px 5px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      /* Common button style */
-
-      /* Ensure html and body elements take full height */
-
-      /* Fixed positioning for the base ribbon */
-      .base-ribbon {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #f4f4f4; /* background color to ensure content behind isn't visible */
-      }
-
-      /* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
-      .container {
-        padding-bottom: 50px; /* Adjusted padding to account for the height of the base ribbon */
-      }
-
-      html,
-      body {
-        height: 100%;
-      }
-
-      /* Make the container take full height minus its padding */
-      .container {
-        min-height: calc(100% - 40px); /* subtracting top and bottom padding */
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Make content grow to take available space */
-      .content {
-        flex: 1;
-      }
-
-      .base-ribbon {
-        background-color: #eee;
-        padding: 10px 0;
-        text-align: center;
-        border-top: 1px solid #ccc;
-        margin-top: 20px;
-      }
-
-      .base-ribbon a {
-        color: #333;
-        text-decoration: none;
-        margin: 0 15px;
-        font-size: 14px;
-      }
-
-      button {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-      .buttonn {
-        background-color: #333;
-        border: none;
-        color: white;
-        padding: 10px 35px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px;
-        margin: 4px 2px;
-        cursor: pointer;
-      }
-      .cart-counts {
-        border: 1px solid black;
-        margin: 0px 16px;
-        border-radius: 5px;
-        padding: 8px 12px;
-      }
-
-      .cart-counts > a {
-        text-decoration: none;
-        font-size: 20px;
-        font-weight: bold;
-      }
-
-      .cart-icon {
-        height: 18px;
-        width: 18px;
-      }
-
-      .left-header-items {
-        display: flex;
-        align-items: center;
-      }
-
-      #current-user-email {
-        display: none;
-      }
-    </style> 0 15px;
-      }
-
-      .search-container {
-        display: flex;
-        align-items: center;
-        padding: 0px 15px;
-      }
-
-      .search-box {
-        padding: 5px;
-        border: none;
-        border-radius: 5px;
-        margin-right: 10px;
-        outline: none;
-        height: 20px;
-      }
-
-      .search-button {
-        background-color: #fff;
-        border: none;
-        padding: 4.5px 5px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      /* Common button style */
-
-      /* Ensure html and body elements take full height */
-
-      /* Fixed positioning for the base ribbon */
-      .base-ribbon {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #f4f4f4; /* background color to ensure content behind isn't visible */
-      }
-
-      /* Add padding to the container to ensure content doesn't overlap with the fixed base ribbon */
-      .container {
-        padding-bottom: 50px; /* Adjusted padding to account for the height of the base ribbon */
-      }
-
-      html,
-      body {
-        height: 100%;
-      }
-
-      /* Make the container take full height minus its padding */
-      .container {
-        min-height: calc(100% - 40px); /* subtracting top and bottom padding */
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Make content grow to take available space */
-      .content {
-        flex: 1;
-      }
-
-      .base-ribbon {
-        background-color: #eee;
-        padding: 10px 0;
-        text-align: center;
-        border-top: 1px solid #ccc;
-        margin-top: 20px;
-      }
-
-      .base-ribbon a {
-        color: #333;
-        text-decoration: none;
-        margin: 0 15px;
-        font-size: 14px;
-      }
-
-      button {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-      .buttonn {
-        background-color: #333;
-        border: none;
-        color: white;
-        padding: 10px 35px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px;
-        margin: 4px 2px;
-        cursor: pointer;
-      }
-      .cart-counts {
-        border: 1px solid black;
-        margin: 0px 16px;
-        border-radius: 5px;
-        padding: 8px 12px;
-      }
-
-      .cart-counts > a {
-        text-decoration: none;
-        font-size: 20px;
-        font-weight: bold;
-      }
-
-      .cart-icon {
-        height: 18px;
-        width: 18px;
-      }
-
-      .left-header-items {
-        display: flex;
-        align-items: center;
-      }
-
-      #current-user-email {
-        display: none;
-      }
-    </style> -->
   <script>
     var cartItems = [];
 
@@ -461,7 +118,7 @@
 
         {% if 'username' in session %}
         <p id="current-user-email">{{session['email']}}</p>
-        <p>Hello, {{ session['username'] }}!</p>
+        <p> {{ session['username'] }}!</p>
         {% endif %}
 
         <div class="header-action">
@@ -506,7 +163,9 @@
             <!-- <ion-icon name="person-outline" aria-hidden="false"></ion-icon> -->
 
             <div class="dropdown-content">
+              {% if 'username' not in session %}
               <a href="/login">Sign In</a>
+              {% endif %}
               <a href="/logout">Sign Out</a>
               <a href="/signup">Sign Up</a>
 
@@ -547,16 +206,25 @@
             </li>
 
             <li>
-              <a href="#" class="navbar-link">Shop</a>
+              <a href="/#book_section" class="navbar-link">Shop</a>
+            </li>
+
+            
+
+            <li>
+              <a href="/contact_us" class="navbar-link">Contact</a>
             </li>
 
             <li>
-              <a href="#" class="navbar-link">About Us</a>
+              <a href="/help" class="navbar-link">Help</a>
             </li>
-
+            {% if 'username' in session %}
             <li>
-              <a href="#" class="navbar-link">Contact</a>
+              <a href="/cart" class="navbar-link">Checkout</a>
             </li>
+            {% endif %}
+
+            
 
           </ul>
 
@@ -575,7 +243,7 @@
   </header>
 
   <div class="content">{% block content %}{% endblock %}</div>
-
+  <div id="chat-container"></div>
   <footer class="footer has-bg-image" style="background-image: url('/static/images/section-bg.jpg')">
 
     <div class="footer-top section">
@@ -728,6 +396,26 @@
 
       </div>
     </div>
+    <script src="/static/chatbot-ui.js"></script>
+      <script>
+        createChatBot(
+          (host = "http://localhost:5000/chat"),
+          (botLogo = "./imgs/bot-logo.png"),
+          (title = "Chat Bot"),
+          (welcomeMessage = "Hey, I am an AI Assistance"),
+          (inactiveMsg =
+            "Server is down, Please contact the developer to activate it"),
+          (theme = "black")
+        );
+
+        document
+          .getElementById("removeLocalStorage")
+          .addEventListener("click", function () {
+            // Remove item from local storage
+            localStorage.removeItem("cartItems");
+            // alert('Local storage item removed!');
+          });
+      </script>
 
   </footer>
 
