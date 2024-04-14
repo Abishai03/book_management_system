@@ -14,7 +14,6 @@ from .send_email import send_book
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
 
-
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 app.secret_key = 'Kjda423sfjsdahf32'  # Required for session management

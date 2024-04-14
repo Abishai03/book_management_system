@@ -210,15 +210,16 @@
             <li>
               <a href="/coupon" class="navbar-link">Coupon</a>
             </li>
-            {% if session['role'] == 'admin' %}
+            
             <li>
               <a href="/#book_section" class="navbar-link">Shop</a>
             </li>
-            {% endif %}
-
+            
+            {% if session['role'] == 'admin' %}
             <li>
               <a href="/add_book" class="navbar-link">Add Book</a>
             </li>
+            {% endif %}
 
             <li>
               <a href="/contact_us" class="navbar-link">Contact</a>

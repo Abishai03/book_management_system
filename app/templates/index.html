@@ -39,6 +39,18 @@
   <link rel="preload" as="image" href="/static/images/hero-banner.png">
   <link rel="preload" as="image" href="/static/images/hero-bg.jpg">
 
+  <style>
+    .horizontal-line {
+      display: flex;
+      align-items: center;
+      float: right;
+    }
+    img{
+      height: 40px;
+      padding: 10px;
+    }
+  </style>
+
 </head>
 
 <body id="top">
@@ -200,32 +212,32 @@
 
 
                 <div class="card-content">
-
                   <h3>{{ book.title }} </h3>
 
-                  <td>
-                    <button onclick="onAddCart({{book}})" id="addToCart" value="{{book}}">
-                      <img class="add-to-cart" src="{{url_for('static', filename='add-to-cart.png')}}" />
-                    </button>
-                  </td>
 
-                  <td>
+                  
+                  <data class="card-price" value="80">${{ book.price }} </data>
+                  <div class="horizontal-line">
+                    {% if 'username' in session %}
+                    <button onclick="onAddCart({{book}})" id="addToCart" value="{{book}}">
+                      <img  class="add-to-cart"
+                        src="{{url_for('static', filename='add-to-cart.png')}}" />
+                    </button>
+                    {% endif %}
+                    {% if session['role'] == 'admin' %}
                     <a class="edit" href="{{ url_for('edit_book', book_id=book.id) }}">
-                      <img class="edit-icon" src="{{ url_for('static', filename='edit-icon.png') }}" />
+                      <img  class="edit-icon"
+                        src="{{ url_for('static', filename='edit-icon.png') }}" />
                     </a>
-                  </td>
-                  <td>
+
                     <form action="/delete_book/{{ book.id }}" method="post">
                       <button id="delete">
-                        <img class="delete-icon" src="{{url_for('static', filename='delete-icon.png')}}" />
+                        <img  class="delete-icon"
+                          src="{{url_for('static', filename='delete-icon.png')}}" />
                       </button>
                     </form>
-                  </td>
-
-                  <data class="card-price" value="80">${{ book.price }} </data>
-                  <button class="action-btn" aria-label="add to cart" title="Add to Cart">
-                    <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                  </button>
+                    {% endif %}
+                  </div>
                   <div style="margin-top: 60px;">
                     <p> <label style="font-weight: bold;">Author: </label>{{ book.author }}</p>
                     <p> <label style="font-weight: bold;">ISDN:</label> {{ book.ISDN }}</p>
@@ -252,15 +264,15 @@
   </main>
   <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-        // Check if URL contains the "query" parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('query')) {
-            // If the "query" parameter is present, scroll to the books section
-            const booksSection = document.getElementById('book_section');
-            booksSection.scrollIntoView({ behavior: 'smooth' });
-        }
+      // Check if URL contains the "query" parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('query')) {
+        // If the "query" parameter is present, scroll to the books section
+        const booksSection = document.getElementById('book_section');
+        booksSection.scrollIntoView({ behavior: 'smooth' });
+      }
     });
-</script>
+  </script>
 
 
 </body>
