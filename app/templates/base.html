@@ -111,14 +111,15 @@
         </a>
 
         <div class="input-wrapper">
-          <input type="search" name="search" placeholder="Search our store" class="input-field">
 
-          <button class="btn btn-primary">Search</button>
+          <form action="{{ url_for('search') }}" method="get">
+            <input type="search" name="query" placeholder="Search our store" class="input-field">
+            <button class="btn btn-primary">Search</button>
+          </form>
         </div>
 
         {% if 'username' in session %}
         <p id="current-user-email">{{session['email']}}</p>
-        <p> {{ session['username'] }}!</p>
         {% endif %}
 
         <div class="header-action">
@@ -142,6 +143,8 @@
             <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
           </a>
 
+
+
           <button class="nav-open-btn" aria-label="open menu" title="Open Menu" data-nav-toggler>
             <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
           </button>
@@ -153,11 +156,15 @@
               <li id="nav-li"><a id="nav-a" href="#">Log out</a></li>
               <li id="nav-li"><a id="nav-a" href="#">Update</a></li>
             </ul>
-
+          
           </button> -->
+
+          {% if 'username' in session %}
+          <p style="margin-right: -20px;"> {{ session['username'] }}</p>
+          {% endif %}
           <div class="dropdown">
             <button class="dropdown-btn">
-            <ion-icon name="person-outline" aria-hidden="false"></ion-icon>
+              <ion-icon name="person-outline" aria-hidden="false"></ion-icon>
             </button>
             <!-- <button class=" dropdown-btn header-action-btn" aria-label="user" title="User"> -->
             <!-- <ion-icon name="person-outline" aria-hidden="false"></ion-icon> -->
@@ -171,7 +178,7 @@
 
             </div>
           </div>
-          
+
 
         </div>
 
@@ -189,7 +196,6 @@
 
           <div class="navbar-top">
             <input type="search" name="search" placeholder="Search our store" class="input-field">
-
             <button class="search-btn" aria-label="Search">
               <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
             </button>
@@ -204,12 +210,15 @@
             <li>
               <a href="/coupon" class="navbar-link">Coupon</a>
             </li>
-
+            {% if session['role'] == 'admin' %}
             <li>
               <a href="/#book_section" class="navbar-link">Shop</a>
             </li>
+            {% endif %}
 
-            
+            <li>
+              <a href="/add_book" class="navbar-link">Add Book</a>
+            </li>
 
             <li>
               <a href="/contact_us" class="navbar-link">Contact</a>
@@ -224,7 +233,7 @@
             </li>
             {% endif %}
 
-            
+
 
           </ul>
 
@@ -397,25 +406,25 @@
       </div>
     </div>
     <script src="/static/chatbot-ui.js"></script>
-      <script>
-        createChatBot(
-          (host = "http://localhost:5000/chat"),
-          (botLogo = "./imgs/bot-logo.png"),
-          (title = "Chat Bot"),
-          (welcomeMessage = "Hey, I am an AI Assistance"),
-          (inactiveMsg =
-            "Server is down, Please contact the developer to activate it"),
-          (theme = "black")
-        );
+    <script>
+      createChatBot(
+        (host = "http://localhost:5000/chat"),
+        (botLogo = "./imgs/bot-logo.png"),
+        (title = "Chat Bot"),
+        (welcomeMessage = "Hey, I am an AI Assistance"),
+        (inactiveMsg =
+          "Server is down, Please contact the developer to activate it"),
+        (theme = "black")
+      );
 
-        document
-          .getElementById("removeLocalStorage")
-          .addEventListener("click", function () {
-            // Remove item from local storage
-            localStorage.removeItem("cartItems");
-            // alert('Local storage item removed!');
-          });
-      </script>
+      document
+        .getElementById("removeLocalStorage")
+        .addEventListener("click", function () {
+          // Remove item from local storage
+          localStorage.removeItem("cartItems");
+          // alert('Local storage item removed!');
+        });
+    </script>
 
   </footer>
 

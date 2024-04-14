@@ -1,140 +1,96 @@
 {% extends "base.html" %} {% block content %}
 <!doctype html>
 <html>
-  <head>
-    <title>Edit Book</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
 
-      h1 {
-        color: #333;
-      }
+<head>
+  <title>Edit Book</title>
+  <style>
+    .book-container {
+      background-color: #fff;
+      border-radius: 5px;
+      max-width: 800px;
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-      .book-container {
-        background-color: #fff;
-        border-radius: 5px;
-        max-width: 800px;
-        width: 300px;
-        margin: 0 auto;
-        padding: 20px;
-      }
+    .input-section {
+      margin-bottom: 10px;
+    }
 
-      .input-section {
-        margin-bottom: 10px;
-      }
+    input[type="submit"] {
+      /* background-color: #333; */
+      border: 1px solid var(--white-1);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      border-radius: var(--radius-pill);
+    }
 
-      input[type="submit"] {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+    input[type="submit"]:hover {
+      background-color:hsl(184, 50%, 60%);
+    }
 
-      input[type="submit"]:hover {
-        background-color: #808080;
-      }
+    textarea {
+      padding: 10px;
+      width: 600px;
+      height: 85px !important;
+      max-width: 100%;
+      line-height: 1.5;
+      border-radius: 5px;
+      background: none;
+      color: #fff;
+    }
 
-      textarea {
-        height: 100%;
-        width: 100px;
-      }
+    .thumbnail {
+      height: 260px;
+      width: 200px;
+    }
 
-      .thumbnail {
-        height: 160px;
-        width: 100px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Edit Book</h1>
+  </style>
+</head>
 
-    {% if message %}
-    <p>{{ message }}</p>
-    {% endif %}
+<body>
 
-    <div class="book-container">
-      <form
-        action="{{ url_for('edit_book', book_id=book.id) }}"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <div class="input-section">
-          Title:
-          <input
-            type="text"
-            name="title"
-            value="{{ book.title }}"
-            required
-          /><br />
-        </div>
+  <section class="section hero" style="padding-block-start: 200px ">
 
-        <div class="input-section">
-          Author:
-          <input
-            type="text"
-            name="author"
-            value="{{ book.author }}"
-            required
-          /><br />
-        </div>
+    <div class="container" style="grid-template-columns:auto; width: 35%;">
+      {% if message %}
+      <p style="color: #06ffe0;">{{ message }}</p>
+      {% endif %}
 
-        <div class="input-section">
-          ISDN:
-          <input
-            type="text"
-            name="ISDN"
-            value="{{ book.ISDN }}"
-            required
-          /><br />
-        </div>
+      <h1>Edit Book</h1>
+      <form action="{{ url_for('edit_book', book_id=book.id) }}" method="post" enctype="multipart/form-data">
 
-        <div class="input-section">
-          Price:
-          <input
-            type="text"
-            name="price"
-            value="{{ book.price }}"
-            required
-          /><br />
-        </div>
+        <label>Title:</label>
+        <input type="text" class="input-field" name="title" value="{{ book.title }}" required /><br />
 
-        <div class="input-section">
-          Description:
-          <textarea name="description" required>{{ book.description }}</textarea
-          ><br />
-        </div>
+        <label>Author:</label>
+        <input type="text" class="input-field" name="author" value="{{ book.author }}" required /><br />
 
-        <div class="input-section">
-          <label> Existing Thumbnail:</label>
-          <br />
-          <img
-            class="thumbnail"
-            src="{{url_for('static', filename=book.thumbnail)}}"
-            alt="Thumbnail"
-          /><br /><br />
-        </div>
-        <div class="input-section">
-          New Thumbnail:
-          <input
-            type="file"
-            id="thumbnail"
-            name="thumbnail"
-            accept="image/*"
-          /><br /><br />
-        </div>
+        <label>ISDN:</label>
+        <input type="text" class="input-field" name="ISDN" value="{{ book.ISDN }}" required /><br />
+
+        <label>Price:</label>
+        <input type="text" class="input-field" name="price" value="{{ book.price }}" required /><br />
+
+        <label>Description:</label><br />
+        <textarea name="description" class="input-field" required>{{ book.description }}</textarea><br />
+
+        <label> Existing Thumbnail:</label>
+        <img class="thumbnail" src="{{url_for('static', filename=book.thumbnail)}}" alt="Thumbnail" />
+
+        <label> New Thumbnail:</label>
+        <input type="file" id="thumbnail" name="thumbnail" accept="image/*" /><br /><br />
+
 
         <input type="submit" value="Update" />
       </form>
     </div>
-  </body>
+  </section>
+</body>
+
 </html>
 
 {% endblock %}

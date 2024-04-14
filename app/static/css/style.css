@@ -335,7 +335,7 @@ body {
   float: left;
 }
 .card-text{
-  margin-top: 60px;
+  /* margin-top: 60px; */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 4;

@@ -1,100 +1,112 @@
 {% extends "base.html" %} {% block content %}
 <!doctype html>
 <html>
-  <head>
-    <title>Add a Book</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
 
-      h1 {
-        color: #333;
-      }
+<head>
+  <title>Add a Book</title>
+  <!-- <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
 
-      .book-container {
-        background-color: #fff;
-        border-radius: 5px;
-        max-width: 800px;
-        width: 300px;
-        margin: 0 auto;
-        padding: 20px;
-      }
+    h1 {
+      color: #333;
+    }
 
-      .input-section {
-        margin-bottom: 10px;
-      }
+    .book-container {
+      background-color: #fff;
+      border-radius: 5px;
+      max-width: 800px;
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-      input[type="submit"] {
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+    .input-section {
+      margin-bottom: 10px;
+    }
 
-      input[type="submit"]:hover {
-        background-color: #808080;
-      }
+    input[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-      textarea {
-        height: 100%;
-        width: 100px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Add a New Book</h1>
+    input[type="submit"]:hover {
+      background-color: #808080;
+    }
 
-    {% if message %}
-    <p>{{ message }}</p>
-    {% endif %}
+    textarea {
+      height: 100%;
+      width: 100px;
+    }
+  </style> -->
+  <style>
+    textarea {
+      padding: 10px;
+      width: 600px;
+      height: 85px !important;
+      max-width: 100%;
+      line-height: 1.5;
+      border-radius: 5px;
+      background: none;
+      color: #fff;
+    }
 
-    <div class="book-container">
-      <form
-        action="{{ url_for('add_book') }}"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <div class="input-section">
-          Title: <input type="text" name="title" required /><br />
-        </div>
+    .btn{
+      padding: 10px 200px;
+      margin-left: 13%;
+    }
+  </style>
+</head>
 
-        <div class="input-section">
-          Author: <input type="text" name="author" required /><br />
-        </div>
+<body>
 
-        <div class="input-section">
-          ISDN: <input type="text" name="ISDN" required /><br />
-        </div>
 
-        <div class="input-section">
-          Price: <input type="text" name="price" required /><br />
-        </div>
+  <section class="section hero" style="padding-block-start: 200px ">
 
-        <div class="input-section">
-          Description: <textarea name="description" required></textarea><br />
-        </div>
+    <div class="container" style="grid-template-columns:auto; width: 35%;">
 
-        <div class="input-section">
-          Thumbnail:
-          <input
-            type="file"
-            id="thumbnail"
-            name="thumbnail"
-            accept="image/*"
-          /><br /><br />
-        </div>
+      <h1>Add a New Book</h1>
 
-        <input type="submit" value="Add" />
+      {% if message %}
+      <p>{{ message }}</p>
+      {% endif %}
+
+
+      <form action="{{ url_for('add_book') }}" method="post" enctype="multipart/form-data">
+        Title:
+        <input type="text" class="input-field" name="title" required /><br />
+
+        Author:
+        <input type="text" class="input-field" name="author" required /><br />
+
+        ISDN:
+        <input type="text" class="input-field" name="ISDN" required /><br />
+
+        Price:
+        <input type="text" class="input-field" name="price" required /><br />
+
+        Description:
+        <textarea class="input-field" name="description" required></textarea><br />
+
+        Thumbnail:
+        <input type="file" id="thumbnail" name="thumbnail" accept="image/*" /><br /><br />
+
+        <input type="submit" class="btn" value="Add" />
       </form>
     </div>
-  </body>
+
+  </section>
+</body>
+
 </html>
 
 {% endblock %}

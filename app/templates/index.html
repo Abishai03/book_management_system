@@ -197,55 +197,48 @@
                     class="img-cover">
                 </div>
 
+
+
                 <div class="card-content">
 
-                  <h3 class="h3 ">
-                     {{ book.title }}   
-                  </h3>
+                  <h3>{{ book.title }} </h3>
 
-                  <data class="card-price" value="80">${{ book.price }}  </data>
+                  <td>
+                    <button onclick="onAddCart({{book}})" id="addToCart" value="{{book}}">
+                      <img class="add-to-cart" src="{{url_for('static', filename='add-to-cart.png')}}" />
+                    </button>
+                  </td>
+
+                  <td>
+                    <a class="edit" href="{{ url_for('edit_book', book_id=book.id) }}">
+                      <img class="edit-icon" src="{{ url_for('static', filename='edit-icon.png') }}" />
+                    </a>
+                  </td>
+                  <td>
+                    <form action="/delete_book/{{ book.id }}" method="post">
+                      <button id="delete">
+                        <img class="delete-icon" src="{{url_for('static', filename='delete-icon.png')}}" />
+                      </button>
+                    </form>
+                  </td>
+
+                  <data class="card-price" value="80">${{ book.price }} </data>
                   <button class="action-btn" aria-label="add to cart" title="Add to Cart">
                     <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
                   </button>
+                  <div style="margin-top: 60px;">
+                    <p> <label style="font-weight: bold;">Author: </label>{{ book.author }}</p>
+                    <p> <label style="font-weight: bold;">ISDN:</label> {{ book.ISDN }}</p>
+                    <br />
+                  </div>
                   <p class="card-text">
+
                     {{ book.description }}
                   </p>
 
-                  <p>{{ book.author }}</p>
-                  <p>{{ book.ISDN }}</p>
 
-          <td>
-            <button
-              onclick="onAddCart({{book}})"
-              id="addToCart"
-              value="{{book}}"
-            >
-              <img
-                class="add-to-cart"
-                src="{{url_for('static', filename='add-to-cart.png')}}"
-              />
-            </button>
-          </td>
-      
-          <td>
-            <a class="edit" href="{{ url_for('edit_book', book_id=book.id) }}">
-              <img
-                class="edit-icon"
-                src="{{ url_for('static', filename='edit-icon.png') }}"
-              />
-            </a>
-          </td>
-          <td>
-            <form action="/delete_book/{{ book.id }}" method="post">
-              <button id="delete">
-                <img
-                  class="delete-icon"
-                  src="{{url_for('static', filename='delete-icon.png')}}"
-                />
-              </button>
-            </form>
-          </td>
-        
+
+
 
                 </div>
 
@@ -255,12 +248,19 @@
           </ul>
         </div>
       </section>
-
-
-
-
     </article>
   </main>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        // Check if URL contains the "query" parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('query')) {
+            // If the "query" parameter is present, scroll to the books section
+            const booksSection = document.getElementById('book_section');
+            booksSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+</script>
 
 
 </body>

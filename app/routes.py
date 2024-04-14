@@ -166,7 +166,8 @@ def edit_book(book_id):
                 thumbnail_path = thumbnail_path.replace("app/","")
                 book.thumbnail = thumbnail_path
                 
-            
+            book = {'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("static/", "") if book.thumbnail else 'empty-book-cover.jpeg' }
+
             # Commit the changes to the database
             db.session.commit()
             return render_template('edit_book.html', book=book, message="Book updated successfully.")
@@ -230,6 +231,7 @@ def logout():
 
 @app.route('/search')
 def search():
+  
   query = request.args.get('query')
   
   books = search_books(query)

@@ -2,150 +2,170 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart</title>
-    <style>
-      /* Style for cart items */
-      .cart-item {
-        border: 1px solid #ccc;
-        margin-bottom: 10px;
-        padding: 10px;
-      }
-      /* Style for buy button */
-      .buy-btn {
-        background-color: #4caf50; /* Green */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-      }
-      .coupon {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 8px;
-        justify-content: start;
-        padding: 0px 8px 0px 0px;
-      }
-      .coupon > input {
-        height: 40px;
-        width: 100%;
-        font-size: 18px;
-      }
-      .total-price {
-        font-size: 18px;
-        font-weight: bold;
-        padding: 8px 0px;
-      }
-      .cart-items {
-        font-size: 18px;
-        padding: 16px 0px;
-      }
-      .cart-item {
-        display: flex;
-        justify-content: space-between;
-      }
-      h1 {
-        padding: 16px 8px 0px 0px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Shopping Cart</h1>
-    {% if message %}
-    <p>{{ message }}</p>
-    {% endif %}
-    <div id="cart-items" class="cart-items">
-      <!-- Cart items will be dynamically added here -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart</title>
+  <style>
+    /* Style for cart items */
+    .cart-item {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #140b1e;
+    }
+
+    /* Style for buy button */
+    .buy-btn {
+      background-color: #4caf50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .remove-btn {
+      color: #0d41df;
+
+    }
+
+    .coupon {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+      justify-content: start;
+      padding: 0px 8px 0px 0px;
+    }
+
+    .coupon>input {
+      height: 40px;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    .total-price {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 8px 0px;
+    }
+
+    .cart-items {
+      font-size: 18px;
+      padding: 16px 0px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    
+    h1 {
+      padding: 16px 8px 0px 0px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="section hero has-bg-image">
+    <div class="container" style="grid-template-columns:auto;">
+      <h1>Shopping Cart</h1>
+      {% if message %}
+      <p>{{ message }}</p>
+      {% endif %}
+      <div id="cart-items" class="cart-items">
+        <!-- Cart items will be dynamically added here -->
+      </div>
+      <div id="total-price" class="total-price"></div>
+
+      <div class="coupon">
+        <label>Coupon Code: </label>
+        <input id="coupon" class="input-field" type="text" name="coupon" />
+      </div>
+      <button class="btn" id="buy-button" onclick="buyItems()"> Buy Items </button>
     </div>
-    <div id="total-price" class="total-price"></div>
+  </section>
+  <script>
+    // Function to display cart items
+    let cartItemsToDisplay = getCartItemsFromStorage();
 
-    <div class="coupon">
-      <label>Coupon Code: </label>
-      <input id="coupon" type="text" name="coupon" />
-    </div>
-    <button class="buy-btn" id="buy-button" onclick="buyItems()">
-      Buy Items
-    </button>
+    function displayCartItems() {
+      const cartContainer = document.getElementById("cart-items");
+      const totalPriceContainer = document.getElementById("total-price");
+      const buyButton = document.getElementById("buy-button");
 
-    <script>
-      // Function to display cart items
-      let cartItemsToDisplay = getCartItemsFromStorage();
+      cartContainer.innerHTML = ""; // Clear existing items
+      let totalPrice = 0;
+      if (cartItemsToDisplay.length === 0) {
+        buyButton.disabled = true;
+        buyButton.style.backgroundColor = "gray";
+        buyButton.style.cursor = "auto";
+        cartContainer.innerHTML = "No Books Added To Cart!";
+      }
 
-      function displayCartItems() {
-        const cartContainer = document.getElementById("cart-items");
-        const totalPriceContainer = document.getElementById("total-price");
-        const buyButton = document.getElementById("buy-button");
-
-        cartContainer.innerHTML = ""; // Clear existing items
-        let totalPrice = 0;
-        if (cartItemsToDisplay.length === 0) {
-          buyButton.disabled = true;
-          buyButton.style.backgroundColor = "gray";
-          buyButton.style.cursor = "auto";
-          cartContainer.innerHTML = "No Books Added To Cart!";
-        }
-
-        cartItemsToDisplay.forEach((item) => {
-          totalPrice += item.price;
-          const itemElement = document.createElement("div");
-          itemElement.classList.add("cart-item");
-          itemElement.innerHTML = `
+      cartItemsToDisplay.forEach((item) => {
+        totalPrice += item.price;
+        const itemElement = document.createElement("div");
+        itemElement.classList.add("cart-item");
+        itemElement.innerHTML = `
                     <div>
                       <p>Name: ${item.title}</p>
                       <p>Price: $${item.price}</p>
                     </div>
                     <button class="remove-btn" onclick="removeItem(${item.ISDN})">Remove</button>
                 `;
-          cartContainer.appendChild(itemElement);
-        });
-        totalPriceContainer.innerText = `Total: $${totalPrice.toFixed(2)}`;
+        cartContainer.appendChild(itemElement);
+      });
+      totalPriceContainer.innerText = `Total: $${totalPrice.toFixed(2)}`;
+    }
+
+    function removeItem(itemId) {
+      cartItemsToDisplay = cartItemsToDisplay.filter(
+        (item) => item.ISDN !== itemId.toString()
+      );
+
+      saveCartItemsToStorage(cartItemsToDisplay); // Save updated cart items to storage
+      displayCartItems(cartItemsToDisplay); // Update cart display
+      displayToCart(cartItemsToDisplay);
+    }
+
+    // Function to simulate buying items
+    async function buyItems() {
+      var code = document.getElementById("coupon").value;
+      const response = await fetch("/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ items: cartItemsToDisplay, coupon: code }),
+      });
+      let json = await response.json();
+      alert(json["message"]);
+      if (json["success"] === "true") {
+        const couponInput = document.getElementById("coupon");
+        couponInput.value = "";
+        cartItemsToDisplay = [];
+        saveCartItemsToStorage([]);
+        displayCartItems([]);
+        displayToCart([]);
       }
+      // alert("Books purchased successfully! and send to email");
+    }
 
-      function removeItem(itemId) {
-        cartItemsToDisplay = cartItemsToDisplay.filter(
-          (item) => item.ISDN !== itemId.toString()
-        );
+    // Display cart items when the page loads
+    displayCartItems();
+  </script>
+</body>
 
-        saveCartItemsToStorage(cartItemsToDisplay); // Save updated cart items to storage
-        displayCartItems(cartItemsToDisplay); // Update cart display
-        displayToCart(cartItemsToDisplay);
-      }
-
-      // Function to simulate buying items
-      async function buyItems() {
-        var code = document.getElementById("coupon").value;
-        const response = await fetch("/cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ items: cartItemsToDisplay, coupon: code }),
-        });
-        let json = await response.json();
-        alert(json["message"]);
-        if (json["success"] === "true") {
-          const couponInput = document.getElementById("coupon");
-          couponInput.value = "";
-          cartItemsToDisplay = [];
-          saveCartItemsToStorage([]);
-          displayCartItems([]);
-          displayToCart([]);
-        }
-        // alert("Books purchased successfully! and send to email");
-      }
-
-      // Display cart items when the page loads
-      displayCartItems();
-    </script>
-  </body>
 </html>
 
 {% endblock %}
