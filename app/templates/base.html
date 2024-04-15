@@ -173,7 +173,9 @@
               {% if 'username' not in session %}
               <a href="/login">Sign In</a>
               {% endif %}
+              {% if 'username' in session %}
               <a href="/logout">Sign Out</a>
+              {% endif %}
               <a href="/signup">Sign Up</a>
 
             </div>
