@@ -208,10 +208,11 @@
             <li>
               <a href="/" class="navbar-link">Home</a>
             </li>
-
+            {% if 'username' in session %}
             <li>
               <a href="/coupon" class="navbar-link">Coupon</a>
             </li>
+            {% endif %}
             
             <li>
               <a href="/#book_section" class="navbar-link">Shop</a>
