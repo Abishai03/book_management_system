@@ -5,7 +5,7 @@ import logging
 from datetime import timedelta
 from datetime import timedelta, datetime
 from flask_sqlalchemy import SQLAlchemy
-from .chat_db import db_chain
+from .chat_db import get_completion
 from flask import jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
@@ -53,6 +53,7 @@ class Coupon(db.Model):
 # with app.app_context():
 #     db.create_all()
 
+uses_messages = {}
 @app.route('/')
 def index():
 
@@ -258,11 +259,28 @@ def search_books(query):
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
     if request.method == 'POST':
-        
+        messages = []
         message = request.json['message']
-        print(message)
-        response = db_chain.run(message)
-        print("response: ", response)
+        print(session['username'])
+        if uses_messages.get(session['username']):
+            messages = uses_messages[session['username']]
+        else:
+            books = Book.query.all()
+            text = "You are AI assistance of books store. Below is given all books informations."
+            for book in books:
+                text += f"Title: {book.title}\n"
+                text += f"Author: {book.author}\n"
+                text += f"ISDN: {book.ISDN}\n"
+                text += f"Price: {book.price}\n"
+                text += f"Description: {book.description}\n"
+            messages = [{'role': 'system', 'content': text}]
+            uses_messages[session['username']] = messages
+        print(messages)
+        messages.append({"role": "user", "content": message})
+        
+        response = get_completion(messages)
+        messages.append({'role': 'assistant', 'content':response})
+        uses_messages[session['username']] = messages
         return [{"text":response}]
 
 def generate_html(book_list, coupon):
