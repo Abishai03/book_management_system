@@ -1,6 +1,6 @@
-# from app import app
+import uuid
+import os
 from flask import  Flask, render_template, request, redirect, url_for, session, flash
-from .db_layer import *
 import logging
 from datetime import timedelta
 from datetime import timedelta, datetime
@@ -35,10 +35,12 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     author = db.Column(db.String(80),nullable=False)
-    ISDN = db.Column(db.String(80), nullable=False)
+    ISDN = db.Column(db.String(80), unique=True, nullable=False)
     price = db.Column(db.Float(80),  nullable=False)
     description = db.Column(db.String(200), nullable=False)
     thumbnail = db.Column(db.String(200))
+    ebook = db.Column(db.String(300))
+
 
 class Coupon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -85,25 +87,33 @@ def add_book():
             
             # Handle thumbnail upload
             thumbnail = request.files['thumbnail']
+            ebook = request.files['ebook']
+
+            directory = app.config['UPLOAD_FOLDER']
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+
+
             if thumbnail.filename != '':
-                
                 try:
-                    directory = app.config['UPLOAD_FOLDER']
-                    if not os.path.exists(directory):
-                        os.makedirs(directory)
-                    
                     # # Save the thumbnail to the static folder
                     thumbnail_filename = secure_filename(thumbnail.filename)
                     thumbnail_path = os.path.join(app.config['UPLOAD_FOLDER'], thumbnail_filename)
                     thumbnail.save(thumbnail_path)
-                 
-
                 except Exception as e:
-                    print("ERROR: ",e)
-
-
-                
+                    print("ERROR saving thumbnail : ",e)
                 thumbnail_path = thumbnail_path.replace("app/","")
+            
+            if ebook.filename != '':
+                try:
+                    # # Save the ebook to the static folder
+                    ebook_filename = secure_filename(ebook.filename)
+                    ebook_path = os.path.join(app.config['UPLOAD_FOLDER'], ebook_filename)
+                    ebook.save(ebook_path)
+                except Exception as e:
+                    print("ERROR saving ebook_path : ",e)
+                ebook_path = ebook_path.replace("app/","")
+
             # Create a new book object with the extracted details
             new_book = Book(
                 title=title,
@@ -111,7 +121,8 @@ def add_book():
                 ISDN=ISDN,
                 price=price,
                 description=description,
-                thumbnail=thumbnail_path  # Assign the path of the saved thumbnail
+                thumbnail=thumbnail_path,  # Assign the path of the saved thumbnail
+                ebook=ebook_path  # Assign the path of the saved ebook
             )
             db.session.add(new_book)
             db.session.commit()
@@ -261,6 +272,8 @@ def chat():
     if request.method == 'POST':
         messages = []
         message = request.json['message']
+        if not session.get('username'):
+            session['username'] =  uuid.uuid4()
         print(session['username'])
         if uses_messages.get(session['username']):
             messages = uses_messages[session['username']]
@@ -275,7 +288,6 @@ def chat():
                 text += f"Description: {book.description}\n"
             messages = [{'role': 'system', 'content': text}]
             uses_messages[session['username']] = messages
-        print(messages)
         messages.append({"role": "user", "content": message})
         
         response = get_completion(messages)
@@ -286,6 +298,7 @@ def chat():
 def generate_html(book_list, coupon):
     html = "<html>\n<head>\n<title>Book List</title>\n</head>\n<body>\n"
     total = 0
+    ebooks = []
     for book in book_list:
         html += "<div>\n"
         html += f"<h2>{book['title']}</h2>\n"
@@ -293,14 +306,16 @@ def generate_html(book_list, coupon):
         html += f"<p><strong>ISDN:</strong> {book['ISDN']}</p>\n"
         html += f"<p><strong>Price:</strong> ${book['price']}</p>\n"
         html += f"<p><strong>Description:</strong> {book['description']}</p>\n"
-        # html += f"<img src='{book['thumbnail']}' alt='{book['title']}' width='100' height='150'>\n"
         html += "</div>\n"
         total += book['price']
+        query = Book.query.filter_by(ISDN=book['ISDN']).first()
+        ebook = query.ebook
+        ebooks.append(ebook)
     total= total - coupon 
     html += "============================<br/><br/> <p><strong> Coupon: -"+str(coupon)+"</strong></p>"
     html += "<br/>============================<br/><br/> <p><strong>Total: "+str(total)+"</strong></p>"
     html += "</body>\n</html>"
-    return html
+    return html, ebooks
 
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
@@ -311,7 +326,6 @@ def cart():
         code = request.json['coupon']
         coupon = Coupon.query.filter_by(code=code).first()
         minus_total = 0
-        print(coupon)
         if coupon != None:
             current_date = datetime.now().date()
             if current_date <= coupon.expiration_date:
@@ -319,10 +333,10 @@ def cart():
         
             else:
                 return jsonify({"message":"Coupon has expired! Please use another one"})
-        else:
-                return jsonify({"message":"Not a Valid Coupon!"})
-        books = generate_html(request.json['items'], minus_total)
-        status = send_book(recipient=session['email'],content=books)
+        # else:
+        #         return jsonify({"message":"Not a Valid Coupon!"})
+        email_body, ebooks = generate_html(request.json['items'], minus_total)
+        status = send_book(files=ebooks, recipient=session['email'],content=email_body)
         if status:
             return jsonify({"success": "true", "message":"Success! Books purchased successfully! and send to email"})
 

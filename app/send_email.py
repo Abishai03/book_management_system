@@ -13,7 +13,7 @@ gmail_user = os.getenv('email')
 gmail_password = os.getenv('password')
 
 
-def send_book(filename=None, recipient=None, content=None):
+def send_book(files=None, recipient=None, content=None):
 	# Create message container
 	msg = MIMEMultipart()
 	msg['From'] = gmail_user
@@ -23,15 +23,15 @@ def send_book(filename=None, recipient=None, content=None):
 	# Email body
 	body = content
 	msg.attach(MIMEText(body, 'html'))
-	if filename:
-		# Attach file
-		attachment = open(filename, 'rb')
-
-		part = MIMEBase('application', 'octet-stream')
-		part.set_payload((attachment).read())
-		encoders.encode_base64(part)
-		part.add_header('Content-Disposition', "attachment; filename= %s" % filename.split("/")[-1])
-		msg.attach(part)
+	if files:
+		for file in files:
+			# Attach file
+			attachment = open("app/"+file, 'rb')
+			part = MIMEBase('application', 'octet-stream')
+			part.set_payload((attachment).read())
+			encoders.encode_base64(part)
+			part.add_header('Content-Disposition', "attachment; filename= %s" % file.split("/")[-1])
+			msg.attach(part)
 
 	try:
 		# Establish a connection to Gmail's SMTP server
