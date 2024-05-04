@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/static/chatbot-ui.css" />
+  <link rel="stylesheet" href="/static/css/chatbot-ui.css" />
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -409,11 +409,17 @@
 
       </div>
     </div>
-    <script src="/static/chatbot-ui.js"></script>
+    <script src="/static/js/chatbot-ui.js"></script>
     <script>
+      // Get the URL of the website including the port
+      var websiteURL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
+
+      // Display the website URL
+      console.log("Website URL with port: " + websiteURL);
+
       createChatBot(
-        (host = "http://localhost:5000/chat"),
-        (botLogo = "./imgs/bot-logo.png"),
+        (host = websiteURL+"/chat"),
+        (botLogo = "./images/bot-logo.png"),
         (title = "Chat Bot"),
         (welcomeMessage = "Hey, I am an AI Assistance"),
         (inactiveMsg =

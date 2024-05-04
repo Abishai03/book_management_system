@@ -60,7 +60,7 @@ uses_messages = {}
 def index():
 
     books = Book.query.all()
-    book_list = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/empty-book-cover.jpeg' } for book in books]
+    book_list = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/images/empty-book-cover.png' } for book in books]
 
     # book_list = get_books_from_json()
     # print(book_list)
@@ -143,7 +143,7 @@ def edit_book(book_id):
     book = Book.query.get_or_404(book_id)
 
     if request.method == 'GET':
-        book = {'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("static/", "") if book.thumbnail else 'empty-book-cover.jpeg' }
+        book = {'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("static/", "") if book.thumbnail else 'empty-book-cover.png' }
         return render_template('edit_book.html', book=book)
  
     
@@ -177,7 +177,7 @@ def edit_book(book_id):
                 thumbnail_path = thumbnail_path.replace("app/","")
                 book.thumbnail = thumbnail_path
                 
-            book = {'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("static/", "") if book.thumbnail else 'empty-book-cover.jpeg' }
+            book = {'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("static/", "") if book.thumbnail else 'empty-book-cover.png' }
 
             # Commit the changes to the database
             db.session.commit()
@@ -263,7 +263,7 @@ def search_books(query):
     books = Book.query.filter(Book.title.ilike('%'+str(query)+"%")).all()
     
     # Prepare the response
-    results = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/empty-book-cover.jpeg'  } for book in books]
+    results = [{'id': book.id, 'title': book.title, 'author': book.author,'ISDN': book.ISDN, 'price': book.price, 'description': book.description, 'thumbnail': book.thumbnail.replace("/static", "") if book.thumbnail else 'static/images/empty-book-cover.png'  } for book in books]
 
     return results
 

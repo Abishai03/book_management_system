@@ -221,19 +221,19 @@
                     {% if 'username' in session %}
                     <button onclick="onAddCart({{book}})" id="addToCart" value="{{book}}">
                       <img  class="add-to-cart"
-                        src="{{url_for('static', filename='add-to-cart.png')}}" />
+                        src="{{url_for('static', filename='images/add-to-cart.png')}}" />
                     </button>
                     {% endif %}
                     {% if session['role'] == 'admin' %}
                     <a class="edit" href="{{ url_for('edit_book', book_id=book.id) }}">
                       <img  class="edit-icon"
-                        src="{{ url_for('static', filename='edit-icon.png') }}" />
+                        src="{{ url_for('static', filename='images/edit-icon.png') }}" />
                     </a>
 
                     <form action="/delete_book/{{ book.id }}" method="post">
                       <button id="delete">
                         <img  class="delete-icon"
-                          src="{{url_for('static', filename='delete-icon.png')}}" />
+                          src="{{url_for('static', filename='images/delete-icon.png')}}" />
                       </button>
                     </form>
                     {% endif %}
